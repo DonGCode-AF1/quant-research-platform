@@ -1,0 +1,14 @@
+version: 1
+experiments:
+  - id: E001
+    question: 示例策略能否稳定复现完整回测链路？
+    hypothesis: 相同代码、数据快照和配置会产生相同结果。
+    baseline: null
+    primary_change: 建立平台基线
+    preregistered_metrics: [pipeline_completion, deterministic_equity, provenance_completeness]
+    strategy: equal_weight@1.0.0
+    snapshot: demo-cn-etf-synthetic-v1
+    run_ids: []
+    conclusion: pending
+    git_commit: uncommitted
+

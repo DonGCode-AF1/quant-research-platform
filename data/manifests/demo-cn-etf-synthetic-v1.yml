@@ -1,0 +1,23 @@
+id: demo-cn-etf-synthetic-v1
+name: 合成中国ETF软件验收快照
+source: deterministic synthetic generator
+license: MIT (generated fixture)
+synthetic: true
+path: data/snapshots/demo-cn-etf-synthetic-v1/market.csv
+coverage:
+  start: '2020-01-02'
+  end: '2025-12-31'
+symbols:
+- '510300'
+- '510500'
+- '512100'
+- '512480'
+- '512690'
+- '515000'
+fields:
+- date
+- symbol
+- close
+- amount
+sha256: e652504876fe452a6c465da188849ac6e2f0087b59956ab18ea4feb05b96fc54
+generated_by: scripts/create_demo_snapshot.py

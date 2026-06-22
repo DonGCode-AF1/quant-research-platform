@@ -1,0 +1,20 @@
+id: equal_weight
+name: 等权基准
+version: 1.0.0
+status: example
+description: 在每个调仓日将资金等权分配到所选标的，用于验收回测链路。
+parameters:
+  cash_buffer:
+    type: number
+    default: 0.0
+    minimum: 0.0
+    maximum: 0.5
+data_requirements: [close]
+asset_classes: [equity, etf]
+frequencies: [daily, weekly, month_end]
+author: DonGCode-AF1
+created_at: 2026-06-22
+git_commit: uncommitted
+risk_notice: 示例策略没有预测能力，不应被解释为投资建议。
+known_limitations: 忽略成交量容量，仅支持多头。
+

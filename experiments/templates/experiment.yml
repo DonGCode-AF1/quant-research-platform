@@ -1,0 +1,12 @@
+id: E###
+question: null
+hypothesis: null
+baseline: null
+primary_change: null
+preregistered_metrics: []
+strategy: null
+snapshot: null
+run_ids: []
+conclusion: pending
+git_commit: null
+

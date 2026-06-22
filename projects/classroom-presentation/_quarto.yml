@@ -1,0 +1,20 @@
+project:
+  type: default
+  output-dir: _site
+
+title: "轻量量化策略：从研究问题到可复现证据"
+author: "课程期末项目"
+lang: zh
+
+format:
+  revealjs:
+    theme: [default, custom.scss]
+    slide-number: true
+    transition: fade
+    incremental: false
+  pptx: default
+
+bibliography: references.bib
+execute:
+  freeze: auto
+

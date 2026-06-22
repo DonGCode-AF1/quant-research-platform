@@ -1,0 +1,12 @@
+/*-- scss:defaults --*/
+$body-bg: #0b111a;
+$body-color: #e9eef6;
+$link-color: #37d6cf;
+$presentation-heading-color: #f4f7fb;
+$font-family-sans-serif: "Noto Sans CJK SC", "Microsoft YaHei", sans-serif;
+
+/*-- scss:rules --*/
+.reveal h2 { border-left: .16em solid #37d6cf; padding-left: .5em; }
+.reveal strong { color: #37d6cf; }
+.reveal .slide-number { color: #ff785f; }
+
