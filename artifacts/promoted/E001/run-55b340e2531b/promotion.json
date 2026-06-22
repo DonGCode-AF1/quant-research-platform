@@ -1,0 +1,10 @@
+{
+  "experiment_id": "E001",
+  "run_id": "run-55b340e2531b",
+  "files": {
+    "equity.csv": "c19e74b69c4384a34540ac8302458ab4dbeeecbb3a55d961032940e6cadbd010",
+    "result.json": "ddcbb494077890d7f5968b2501c1100f116c390e0a1e868f60dd485af1320269",
+    "trades.csv": "62e4289ec67067e57d35f9aa86e26f5b397ffa096843cef04bdb8909731151f8",
+    "weights.csv": "4ec00e1b2c53fc062bbbebad3d5d7ec7fddf31dd169b7518cf9368ff90996444"
+  }
+}

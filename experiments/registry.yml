@@ -8,7 +8,7 @@ experiments:
     preregistered_metrics: [pipeline_completion, deterministic_equity, provenance_completeness]
     strategy: equal_weight@1.0.0
     snapshot: demo-cn-etf-synthetic-v1
-    run_ids: []
-    conclusion: pending
-    git_commit: uncommitted
+    run_ids: [run-55b340e2531b]
+    conclusion: keep
+    git_commit: 40431db2fe49a3f6bdae2c53ffc114b9c158772d
 

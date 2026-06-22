@@ -1,0 +1,40 @@
+{
+  "metrics": {
+    "total_return": 1.1273800302062638,
+    "cagr": 0.15706182251522227,
+    "volatility": 0.10629309685461594,
+    "sharpe": 1.4259741526695902,
+    "max_drawdown": -0.11554330703821925,
+    "annual_turnover": 0.19325153374233128
+  },
+  "request": {
+    "strategy_id": "equal_weight",
+    "strategy_version": "1.0.0",
+    "parameters": {
+      "cash_buffer": 0
+    },
+    "snapshot_id": "demo-cn-etf-synthetic-v1",
+    "symbols": [
+      "510300",
+      "510500",
+      "512100",
+      "512480",
+      "512690",
+      "515000"
+    ],
+    "start": "2021-01-01",
+    "end": "2025-12-31",
+    "initial_capital": 1000000.0,
+    "rebalance": "month_end",
+    "commission_bps": 5.0,
+    "slippage_bps": 5.0,
+    "t_plus_one": true,
+    "seed": 42
+  },
+  "warnings": [],
+  "provenance": {
+    "run_id": "run-55b340e2531b",
+    "git_commit": "40431db2fe49a3f6bdae2c53ffc114b9c158772d",
+    "data_hash": "e652504876fe452a6c465da188849ac6e2f0087b59956ab18ea4feb05b96fc54"
+  }
+}
