@@ -1,0 +1,288 @@
+﻿source,line,type,time,context,event
+research_log_2026-06-22.md,1,heading,,2026-06-22 研究探索日志,2026-06-22 研究探索日志
+research_log_2026-06-22.md,3,heading,,概述,概述
+research_log_2026-06-22.md,9,heading,,一、已完成的核心实验,一、已完成的核心实验
+research_log_2026-06-22.md,11,heading,,1.1 调仓日优化 (月末 vs 月中),1.1 调仓日优化 (月末 vs 月中)
+research_log_2026-06-22.md,12,bullet,,1.1 调仓日优化 (月末 vs 月中),实验: 4 种配置 (月末/月中 × 原因子/增强因子)
+research_log_2026-06-22.md,13,bullet,,1.1 调仓日优化 (月末 vs 月中),关键发现: 月中(15日)调仓全面优于月末，CAGR +0.6pp，回撤 -5.8pp
+research_log_2026-06-22.md,14,bullet,,1.1 调仓日优化 (月末 vs 月中),最优: 月中15日 + 增强因子 → Sharpe 0.79
+research_log_2026-06-22.md,15,bullet,,1.1 调仓日优化 (月末 vs 月中),文件: `mvp_cn/src/compare_rebalance.py`
+research_log_2026-06-22.md,18,heading,,1.2 因子增强 (8因子 vs 5因子),1.2 因子增强 (8因子 vs 5因子)
+research_log_2026-06-22.md,19,bullet,,1.2 因子增强 (8因子 vs 5因子),新增因子: 成交额动量、量比(20/120)、相对强度
+research_log_2026-06-22.md,20,bullet,,1.2 因子增强 (8因子 vs 5因子),效果: Sharpe +0.04，CAGR +1.5pp (在月中调仓下)
+research_log_2026-06-22.md,23,heading,,1.3 ETF 颗粒度对比 (6只 vs 16只 vs 22只),1.3 ETF 颗粒度对比 (6只 vs 16只 vs 22只)
+research_log_2026-06-22.md,24,bullet,,1.3 ETF 颗粒度对比 (6只 vs 16只 vs 22只),核心发现: ETF 数量与绩效呈单调递减关系
+research_log_2026-06-22.md,25,bullet,,1.3 ETF 颗粒度对比 (6只 vs 16只 vs 22只),粗粒度(6只): Sharpe 0.79 → 最优
+research_log_2026-06-22.md,26,bullet,,1.3 ETF 颗粒度对比 (6只 vs 16只 vs 22只),中粒度(16只): Sharpe 0.45
+research_log_2026-06-22.md,27,bullet,,1.3 ETF 颗粒度对比 (6只 vs 16只 vs 22只),细粒度(22只): Sharpe 0.21
+research_log_2026-06-22.md,29,bullet,,1.3 ETF 颗粒度对比 (6只 vs 16只 vs 22只),文件: `mvp_cn/src/granularity_compare.py`
+research_log_2026-06-22.md,32,heading,,1.4 科技内部轮动,1.4 科技内部轮动
+research_log_2026-06-22.md,33,bullet,,1.4 科技内部轮动,实验: 4/6/9只科技ETF + 等权持有基准
+research_log_2026-06-22.md,34,bullet,,1.4 科技内部轮动,关键发现: 全样本等权持有优于主动轮动；冻结期反转 (AI行情)
+research_log_2026-06-22.md,35,bullet,,1.4 科技内部轮动,结论: 科技内部轮动不可靠，冻结期超额不可外推
+research_log_2026-06-22.md,36,bullet,,1.4 科技内部轮动,文件: `mvp_cn/src/tech_rotation.py`
+research_log_2026-06-22.md,39,heading,,1.5 趋势过滤规则优化 (★ 今日最大发现),1.5 趋势过滤规则优化 (★ 今日最大发现)
+research_log_2026-06-22.md,41,heading,,1.5.1 崩盘保护过滤器,1.5.1 崩盘保护过滤器
+research_log_2026-06-22.md,43,bullet,,1.5.1 崩盘保护过滤器,结果: 崩盘保护(Sharpe 0.48) < 无过滤(0.52) < 200MA(0.79)
+research_log_2026-06-22.md,44,bullet,,1.5.1 崩盘保护过滤器,结论: 简单的恐慌空仓不如系统性的趋势跟踪
+research_log_2026-06-22.md,46,heading,,1.5.2 多均线对比 (7种策略),1.5.2 多均线对比 (7种策略)
+research_log_2026-06-22.md,47,bullet,,1.5.2 多均线对比 (7种策略),200MA(原始): Sharpe 0.79 — 基准
+research_log_2026-06-22.md,48,bullet,,1.5.2 多均线对比 (7种策略),金叉死叉: Sharpe 0.60
+research_log_2026-06-22.md,49,bullet,,1.5.2 多均线对比 (7种策略),三均线多头: Sharpe 0.24 (过度空仓)
+research_log_2026-06-22.md,50,bullet,,1.5.2 多均线对比 (7种策略),结论: 最简单的200MA反而最优
+research_log_2026-06-22.md,52,heading,,1.5.3 MA周期优化 (★ 核心突破),1.5.3 MA周期优化 (★ 核心突破)
+research_log_2026-06-22.md,54,bullet,,1.5.3 MA周期优化 (★ 核心突破),"峰值: 180MA → Sharpe 0.836, CAGR 16.12%, MaxDD -20.63%"
+research_log_2026-06-22.md,55,bullet,,1.5.3 MA周期优化 (★ 核心突破),"200MA(原): Sharpe 0.794, CAGR 15.12%, MaxDD -21.89%"
+research_log_2026-06-22.md,56,bullet,,1.5.3 MA周期优化 (★ 核心突破),"提升: Sharpe +0.04, CAGR +1.0pp, MaxDD改善1.3pp"
+research_log_2026-06-22.md,58,heading,,1.5.4 180MA 的过拟合检验,1.5.4 180MA 的过拟合检验
+research_log_2026-06-22.md,63,bullet,,1.5.4 180MA 的过拟合检验,秩相关: 开发-冻结 Sharpe Spearman = 0.755
+research_log_2026-06-22.md,64,bullet,,1.5.4 180MA 的过拟合检验,高原区: 170-210天 Sharpe 均在 0.79-0.84
+research_log_2026-06-22.md,66,heading,,1.5.5 时间节点稳健性,1.5.5 时间节点稳健性
+research_log_2026-06-22.md,70,bullet,,1.5.5 时间节点稳健性,结论: 170-180天区间在任何时间节点都稳健
+research_log_2026-06-22.md,72,heading,,1.5.6 为什么是180天？,1.5.6 为什么是180天？
+research_log_2026-06-22.md,73,bullet,,1.5.6 为什么是180天？,A股中期趋势平均持续 7-8 个月 ≈ 170-180 交易日
+research_log_2026-06-22.md,78,heading,,1.6 AKShare 因子探索,1.6 AKShare 因子探索
+research_log_2026-06-22.md,80,bullet,,1.6 AKShare 因子探索,高价值接口: 中国宏观(226)、利率/债券(48)、行业板块(17)、ETF/基金(123)
+research_log_2026-06-22.md,81,bullet,,1.6 AKShare 因子探索,已缓存: 27只行业ETF的双源数据 (Sina + Yahoo)
+research_log_2026-06-22.md,82,bullet,,1.6 AKShare 因子探索,网络限制: 当前环境SSL问题导致部分API不可用
+research_log_2026-06-22.md,85,heading,,1.7 综合报告生成,1.7 综合报告生成
+research_log_2026-06-22.md,88,bullet,,1.7 综合报告生成,图表: 研究路线图、因子IC、API分类、ETF时间线、颗粒度对比、科技轮动、策略热力图、最佳策略深度分析
+research_log_2026-06-22.md,92,heading,,二、最终推荐策略参数,二、最终推荐策略参数
+research_log_2026-06-22.md,105,heading,,"期望绩效 (180MA, 月中15日, 增强因子)","期望绩效 (180MA, 月中15日, 增强因子)"
+research_log_2026-06-22.md,113,heading,,过拟合诊断,过拟合诊断
+research_log_2026-06-22.md,124,heading,,三、实验对照表,三、实验对照表
+research_log_2026-06-22.md,140,heading,,四、未完成 / 明日可继续,四、未完成 / 明日可继续
+research_log_2026-06-22.md,151,heading,,五、文件索引,五、文件索引
+research_log_2026-06-22.md,153,heading,,核心结果,核心结果
+research_log_2026-06-22.md,160,heading,,策略脚本,策略脚本
+research_log_2026-06-22.md,162,bullet,,策略脚本,`mvp_cn/src/compare_rebalance.py` — 调仓日+因子对比
+research_log_2026-06-22.md,167,heading,,报告生成,报告生成
+research_log_2026-06-22.md,174,heading,,六、关键结论,六、关键结论
+research_log_2026-06-22.md,185,heading,,七、完整策略操作逻辑,七、完整策略操作逻辑
+research_log_2026-06-22.md,187,heading,,7.1 ETF投资池,7.1 ETF投资池
+research_log_2026-06-22.md,198,heading,,7.2 数据获取,7.2 数据获取
+research_log_2026-06-22.md,205,heading,,7.3 月度执行流程,7.3 月度执行流程
+research_log_2026-06-22.md,223,heading,,7.4 八个增强因子,7.4 八个增强因子
+research_log_2026-06-22.md,229,bullet,,7.4 八个增强因子,`trend_quality_126`: 126日对数趋势R²×年化斜率
+research_log_2026-06-22.md,237,heading,,7.5 关键参数,7.5 关键参数
+research_log_2026-06-22.md,250,heading,,7.6 期望绩效,7.6 期望绩效
+research_log_2026-06-22.md,257,heading,,7.7 过拟合诊断,7.7 过拟合诊断
+research_log_2026-06-23.md,1,heading,,2026-06-23 研究探索日志,2026-06-23 研究探索日志
+research_log_2026-06-23.md,3,heading,,概述,概述
+research_log_2026-06-23.md,9,bullet,,概述,趋势过滤: 200MA → 180MA（ma180_final验证更优）
+research_log_2026-06-23.md,10,bullet,,概述,新增方法论: POOS墙前/墙后严格分离、多墙稳健性检验、机制拆解（Full/NoTrend/TrendOnly）
+research_log_2026-06-23.md,11,bullet,,概述,ETF选择: ad-hoc 6只 → 系统性筛选（226→26→8→6的完整链路）
+research_log_2026-06-23.md,15,heading,,一、探索时间线,一、探索时间线
+research_log_2026-06-23.md,35,heading,,二、核心实验详情,二、核心实验详情
+research_log_2026-06-23.md,37,heading,,2.1 高频自适应轮动,2.1 高频自适应轮动
+research_log_2026-06-23.md,64,heading,,2.2 ETF系统性筛选,2.2 ETF系统性筛选
+research_log_2026-06-23.md,69,bullet,,2.2 ETF系统性筛选,`ak.fund_etf_spot_em()` + `ak.fund_etf_category_sina()` → 1567只ETF
+research_log_2026-06-23.md,70,bullet,,2.2 ETF系统性筛选,关键词筛选(消费/医药/科技/金融/能源/军工等) → 730只行业ETF
+research_log_2026-06-23.md,74,bullet,,2.2 ETF系统性筛选,`data/raw/sina/` → 226只已缓存ETF
+research_log_2026-06-23.md,99,heading,,2.3 gap_return_20 因子验证,2.3 gap_return_20 因子验证
+research_log_2026-06-23.md,104,bullet,,2.3 gap_return_20 因子验证,3训练窗口(滚动5年/8年/扩展) × 2因子集(基准5/基准+gap)
+research_log_2026-06-23.md,105,bullet,,2.3 gap_return_20 因子验证,扩展窗口ΔSharpe=+0.13（但扩展窗口用全部历史数据—存在look-ahead）
+research_log_2026-06-23.md,106,bullet,,2.3 gap_return_20 因子验证,"滚动5年ΔSharpe=+0.07, 滚动8年ΔSharpe=-0.01"
+research_log_2026-06-23.md,109,bullet,,2.3 gap_return_20 因子验证,"墙=2022-12-31, 墙前决策ΔSharpe=+0.03 → ADOPT"
+research_log_2026-06-23.md,110,bullet,,2.3 gap_return_20 因子验证,墙后锁定模型验证 → Sharpe=1.24 (vs CSI300 0.55)
+research_log_2026-06-23.md,120,heading,,2.4 12ETF长历史扩展 → 发现核心规律,2.4 12ETF长历史扩展 → 发现核心规律
+research_log_2026-06-23.md,149,heading,,2.5 8ETF优化组合,2.5 8ETF优化组合
+research_log_2026-06-23.md,179,heading,,2.6 证券-银行相关性检验,2.6 证券-银行相关性检验
+research_log_2026-06-23.md,197,heading,,2.7 三策略机制拆解对比,2.7 三策略机制拆解对比
+research_log_2026-06-23.md,209,heading,,2.8 完整因子筛选全链路,2.8 完整因子筛选全链路
+research_log_2026-06-23.md,237,heading,,2.9 Alpha交叉验证,2.9 Alpha交叉验证
+research_log_2026-06-23.md,253,heading,,2.10 新维度因子探索,2.10 新维度因子探索
+research_log_2026-06-23.md,277,heading,,2.11 多墙稳健性检验 (最终判定),2.11 多墙稳健性检验 (最终判定)
+research_log_2026-06-23.md,294,heading,,三、今日方法论创新,三、今日方法论创新
+research_log_2026-06-23.md,296,heading,,"3.1 POOS墙 (vs 昨日""冻结期"")","3.1 POOS墙 (vs 昨日""冻结期"")"
+research_log_2026-06-23.md,300,heading,,3.2 机制拆解 (Full/NoTrend/TrendOnly),3.2 机制拆解 (Full/NoTrend/TrendOnly)
+research_log_2026-06-23.md,303,heading,,3.3 因子筛选全管道,3.3 因子筛选全管道
+research_log_2026-06-23.md,306,heading,,3.4 多墙区间报告 (vs 单点Sharpe),3.4 多墙区间报告 (vs 单点Sharpe)
+research_log_2026-06-23.md,312,heading,,四、失败探索及其价值,四、失败探索及其价值
+research_log_2026-06-23.md,325,heading,,五、最终推荐,五、最终推荐
+research_log_2026-06-23.md,341,heading,,六、文件索引,六、文件索引
+mvp_cn/outputs/research_documentation/00_MASTER_TIMELINE.md,1,heading,,00 - 完整时间线与关键决策,00 - 完整时间线与关键决策
+mvp_cn/outputs/research_documentation/00_MASTER_TIMELINE.md,3,heading,,2026-06-22 (Day 1) — 基线建立与策略优化,2026-06-22 (Day 1) — 基线建立与策略优化
+mvp_cn/outputs/research_documentation/00_MASTER_TIMELINE.md,5,heading,,上午,上午
+mvp_cn/outputs/research_documentation/00_MASTER_TIMELINE.md,7,bullet,10:00,上午,10:00 因子增强实验: 5因子→8因子 → Sharpe+0.04，换手可控
+mvp_cn/outputs/research_documentation/00_MASTER_TIMELINE.md,8,bullet,11:00,上午,11:00 ETF颗粒度对比: 6只(Sharpe 0.79) > 16只(0.45) > 22只(0.21)
+mvp_cn/outputs/research_documentation/00_MASTER_TIMELINE.md,9,bullet,,上午,关键规律：ETF越多绩效越差，数据窗口缩短+信号稀释
+mvp_cn/outputs/research_documentation/00_MASTER_TIMELINE.md,11,heading,,下午,下午
+mvp_cn/outputs/research_documentation/00_MASTER_TIMELINE.md,12,bullet,13:00,下午,13:00 科技内部轮动实验 → 结论：不可靠，全样本等权持有优于主动轮动
+mvp_cn/outputs/research_documentation/00_MASTER_TIMELINE.md,13,bullet,14:00,下午,14:00 趋势过滤优化：7种均线策略对比 → 200MA最简单最优
+mvp_cn/outputs/research_documentation/00_MASTER_TIMELINE.md,14,bullet,,下午,崩盘保护过滤器(Sharpe 0.48) < 无过滤(0.52) < 200MA(0.79)
+mvp_cn/outputs/research_documentation/00_MASTER_TIMELINE.md,17,bullet,17:00,下午,17:00 最终收束 → 6ETF + Original-5 + 180MA + 滚动8年
+mvp_cn/outputs/research_documentation/00_MASTER_TIMELINE.md,19,heading,,Day 1 核心交付,Day 1 核心交付
+mvp_cn/outputs/research_documentation/00_MASTER_TIMELINE.md,20,bullet,,Day 1 核心交付,策略基线: 6ETF/5因子/180MA/月频调仓
+mvp_cn/outputs/research_documentation/00_MASTER_TIMELINE.md,21,bullet,,Day 1 核心交付,40+次独立回测实验
+mvp_cn/outputs/research_documentation/00_MASTER_TIMELINE.md,22,bullet,,Day 1 核心交付,关键发现: 粗粒度>细粒度，简单过滤器>复杂过滤器
+mvp_cn/outputs/research_documentation/00_MASTER_TIMELINE.md,26,heading,,2026-06-23 (Day 2) — 系统性验证与新维度探索,2026-06-23 (Day 2) — 系统性验证与新维度探索
+mvp_cn/outputs/research_documentation/00_MASTER_TIMELINE.md,28,heading,,09:00-10:00 高频自适应轮动,09:00-10:00 高频自适应轮动
+mvp_cn/outputs/research_documentation/00_MASTER_TIMELINE.md,29,bullet,,09:00-10:00 高频自适应轮动,问题：细分ETF是否因为需要更高频率？
+mvp_cn/outputs/research_documentation/00_MASTER_TIMELINE.md,30,bullet,,09:00-10:00 高频自适应轮动,实验：3粒度×3频率=9组，频率越快因子回溯期等比缩放
+mvp_cn/outputs/research_documentation/00_MASTER_TIMELINE.md,31,bullet,,09:00-10:00 高频自适应轮动,Bug修复：DateOffset不支持小数年份→取整月；周频low_vol_window修复
+mvp_cn/outputs/research_documentation/00_MASTER_TIMELINE.md,32,bullet,,09:00-10:00 高频自适应轮动,结论：月频是唯一可行配置，换手成本远大于信号改善
+mvp_cn/outputs/research_documentation/00_MASTER_TIMELINE.md,33,bullet,,09:00-10:00 高频自适应轮动,文件：`high_freq_adaptive.py`
+mvp_cn/outputs/research_documentation/00_MASTER_TIMELINE.md,35,heading,,10:00-11:00 ETF系统性筛选,10:00-11:00 ETF系统性筛选
+mvp_cn/outputs/research_documentation/00_MASTER_TIMELINE.md,36,bullet,,10:00-11:00 ETF系统性筛选,问题：原始6只是否有理论依据？
+mvp_cn/outputs/research_documentation/00_MASTER_TIMELINE.md,38,bullet,,10:00-11:00 ETF系统性筛选,发现：原始6只覆盖GICS六大行业，缺失军工/证券/银行方向
+mvp_cn/outputs/research_documentation/00_MASTER_TIMELINE.md,39,bullet,,10:00-11:00 ETF系统性筛选,文件：`screen_etfs.py`
+mvp_cn/outputs/research_documentation/00_MASTER_TIMELINE.md,41,heading,,11:00-12:00 gap_return_20因子POOS验证,11:00-12:00 gap_return_20因子POOS验证
+mvp_cn/outputs/research_documentation/00_MASTER_TIMELINE.md,42,bullet,,11:00-12:00 gap_return_20因子POOS验证,嵌套走步：3训练窗口×2因子集 → ΔSharpe=+0.07(滚动5年)
+mvp_cn/outputs/research_documentation/00_MASTER_TIMELINE.md,43,bullet,,11:00-12:00 gap_return_20因子POOS验证,"POOS墙检验(墙=2022-12-31) → ΔSharpe=+0.03, 方向稳定但增量微弱"
+mvp_cn/outputs/research_documentation/00_MASTER_TIMELINE.md,44,bullet,,11:00-12:00 gap_return_20因子POOS验证,结论：保留为候选，不纳入主策略
+mvp_cn/outputs/research_documentation/00_MASTER_TIMELINE.md,45,bullet,,11:00-12:00 gap_return_20因子POOS验证,"文件：`validate_gap_return.py`, `poos_gap_return.py`"
+mvp_cn/outputs/research_documentation/00_MASTER_TIMELINE.md,47,heading,,12:00-13:00 12ETF长历史回测 → 🔥核心发现,12:00-13:00 12ETF长历史回测 → 🔥核心发现
+mvp_cn/outputs/research_documentation/00_MASTER_TIMELINE.md,48,bullet,,12:00-13:00 12ETF长历史回测 → 🔥核心发现,12ETF：原始6+证券/银行/军工/有色/传媒/非银，共同起点2018-01
+mvp_cn/outputs/research_documentation/00_MASTER_TIMELINE.md,55,bullet,,12:00-13:00 12ETF长历史回测 → 🔥核心发现,"文件：`backtest_12etf.py`, `poos_12etf.py`"
+mvp_cn/outputs/research_documentation/00_MASTER_TIMELINE.md,57,heading,,13:00-14:00 8ETF优化组合设计,13:00-14:00 8ETF优化组合设计
+mvp_cn/outputs/research_documentation/00_MASTER_TIMELINE.md,58,bullet,,13:00-14:00 8ETF优化组合设计,设计：7经济驱动力×1代表ETF
+mvp_cn/outputs/research_documentation/00_MASTER_TIMELINE.md,59,bullet,,13:00-14:00 8ETF优化组合设计,发现：证券-银行相关系数高达0.89，实际只有6个独立信号
+mvp_cn/outputs/research_documentation/00_MASTER_TIMELINE.md,60,bullet,,13:00-14:00 8ETF优化组合设计,结论：8ETF未能超越6ETF
+mvp_cn/outputs/research_documentation/00_MASTER_TIMELINE.md,61,bullet,,13:00-14:00 8ETF优化组合设计,"文件：`backtest_8etf.py`, `poos_8etf.py`"
+mvp_cn/outputs/research_documentation/00_MASTER_TIMELINE.md,63,heading,,14:00-15:00 策略对比与机制分解,14:00-15:00 策略对比与机制分解
+mvp_cn/outputs/research_documentation/00_MASTER_TIMELINE.md,64,bullet,,14:00-15:00 策略对比与机制分解,6ETF vs 8ETF POOS对比
+mvp_cn/outputs/research_documentation/00_MASTER_TIMELINE.md,67,bullet,,14:00-15:00 策略对比与机制分解,"文件：`compare_8v6.py`, `compare_and_decompose.py`"
+mvp_cn/outputs/research_documentation/00_MASTER_TIMELINE.md,69,heading,,15:00-16:00 Alpha交叉验证 + 多因子筛选,15:00-16:00 Alpha交叉验证 + 多因子筛选
+mvp_cn/outputs/research_documentation/00_MASTER_TIMELINE.md,71,bullet,,15:00-16:00 Alpha交叉验证 + 多因子筛选,27→11→Lasso→POOS完整管道
+mvp_cn/outputs/research_documentation/00_MASTER_TIMELINE.md,73,bullet,,15:00-16:00 Alpha交叉验证 + 多因子筛选,"文件：`alpha_cv_poos.py`, `factor_pipeline.py`, `lasso_screen_ridge.py`"
+mvp_cn/outputs/research_documentation/00_MASTER_TIMELINE.md,75,heading,,16:00-18:00 新维度因子探索,16:00-18:00 新维度因子探索
+mvp_cn/outputs/research_documentation/00_MASTER_TIMELINE.md,81,bullet,,16:00-18:00 新维度因子探索,文件：`new_dims_v2.py`
+mvp_cn/outputs/research_documentation/00_MASTER_TIMELINE.md,83,heading,,18:00-19:00 Ridge因子质量诊断 + 因子精简,18:00-19:00 Ridge因子质量诊断 + 因子精简
+mvp_cn/outputs/research_documentation/00_MASTER_TIMELINE.md,84,bullet,,18:00-19:00 Ridge因子质量诊断 + 因子精简,Bug发现：Ridge结果与等权组合混淆，mom_126/mom_252 r=-0.82(共线性)
+mvp_cn/outputs/research_documentation/00_MASTER_TIMELINE.md,85,bullet,,18:00-19:00 Ridge因子质量诊断 + 因子精简,精简实验：Original-5(0.86) → Pure2 mom_126+low_vol(0.92) → +0.06改善!
+mvp_cn/outputs/research_documentation/00_MASTER_TIMELINE.md,86,bullet,,18:00-19:00 Ridge因子质量诊断 + 因子精简,结论：去除共线/噪声因子改善POOS
+mvp_cn/outputs/research_documentation/00_MASTER_TIMELINE.md,87,bullet,,18:00-19:00 Ridge因子质量诊断 + 因子精简,方法：逐步删除+POOS重验证
+mvp_cn/outputs/research_documentation/00_MASTER_TIMELINE.md,89,heading,,19:00-21:00 多墙稳健性检验,19:00-21:00 多墙稳健性检验
+mvp_cn/outputs/research_documentation/00_MASTER_TIMELINE.md,90,bullet,,19:00-21:00 多墙稳健性检验,5墙(2018-2022) × 2策略 × 3因子集 → 15组
+mvp_cn/outputs/research_documentation/00_MASTER_TIMELINE.md,91,bullet,,19:00-21:00 多墙稳健性检验,结论：全墙正向(均值0.92)，墙选择稳健
+mvp_cn/outputs/research_documentation/00_MASTER_TIMELINE.md,92,bullet,,19:00-21:00 多墙稳健性检验,文件：`multi_wall.py`
+mvp_cn/outputs/research_documentation/00_MASTER_TIMELINE.md,94,heading,,21:00-23:00 全面稳健性检验框架搭建,21:00-23:00 全面稳健性检验框架搭建
+mvp_cn/outputs/research_documentation/00_MASTER_TIMELINE.md,96,bullet,,21:00-23:00 全面稳健性检验框架搭建,数据缓存：13只ETF + 15个宏观因子 → CSV本地化
+mvp_cn/outputs/research_documentation/00_MASTER_TIMELINE.md,97,bullet,,21:00-23:00 全面稳健性检验框架搭建,全面检验框架：3ETF粒度×3POOS截点×6因子×2模型=108组
+mvp_cn/outputs/research_documentation/00_MASTER_TIMELINE.md,102,bullet,,21:00-23:00 全面稳健性检验框架搭建,standalone (`standalone_robustness.py`) → 完全独立，月度信号优化，向量化趋势质量
+mvp_cn/outputs/research_documentation/00_MASTER_TIMELINE.md,103,bullet,,21:00-23:00 全面稳健性检验框架搭建,Bug追踪：
+mvp_cn/outputs/research_documentation/00_MASTER_TIMELINE.md,113,heading,,🏗️ 文件版本演进关系,🏗️ 文件版本演进关系
+mvp_cn/outputs/research_documentation/00_MASTER_TIMELINE.md,141,heading,,🔑 最关键的技术决策,🔑 最关键的技术决策
+mvp_cn/outputs/research_documentation/01_DAY1_2026-06-22.md,1,heading,,2026-06-22 研究探索日志,2026-06-22 研究探索日志
+mvp_cn/outputs/research_documentation/01_DAY1_2026-06-22.md,6,heading,,概述,概述
+mvp_cn/outputs/research_documentation/01_DAY1_2026-06-22.md,10,heading,,核心实验,核心实验
+mvp_cn/outputs/research_documentation/01_DAY1_2026-06-22.md,12,heading,,调仓日优化,调仓日优化
+mvp_cn/outputs/research_documentation/01_DAY1_2026-06-22.md,15,heading,,因子增强 (5→8),因子增强 (5→8)
+mvp_cn/outputs/research_documentation/01_DAY1_2026-06-22.md,16,bullet,,因子增强 (5→8),Sharpe +0.04，CAGR +1.5pp
+mvp_cn/outputs/research_documentation/01_DAY1_2026-06-22.md,18,heading,,ETF颗粒度对比 (6/16/22),ETF颗粒度对比 (6/16/22)
+mvp_cn/outputs/research_documentation/01_DAY1_2026-06-22.md,21,heading,,趋势过滤优化 ★,趋势过滤优化 ★
+mvp_cn/outputs/research_documentation/01_DAY1_2026-06-22.md,25,heading,,最终基线,最终基线
+mvp_cn/outputs/research_documentation/01_DAY1_2026-06-22.md,26,bullet,,最终基线,6ETF + Original-5 + 180MA + 8年滚动训练
+mvp_cn/outputs/research_documentation/02_DAY2_2026-06-23.md,1,heading,,2026-06-23 研究探索日志,2026-06-23 研究探索日志
+mvp_cn/outputs/research_documentation/02_DAY2_2026-06-23.md,3,heading,,概述,概述
+mvp_cn/outputs/research_documentation/02_DAY2_2026-06-23.md,9,bullet,,概述,趋势过滤: 200MA → 180MA（ma180_final验证更优）
+mvp_cn/outputs/research_documentation/02_DAY2_2026-06-23.md,10,bullet,,概述,新增方法论: POOS墙前/墙后严格分离、多墙稳健性检验、机制拆解（Full/NoTrend/TrendOnly）
+mvp_cn/outputs/research_documentation/02_DAY2_2026-06-23.md,11,bullet,,概述,ETF选择: ad-hoc 6只 → 系统性筛选（226→26→8→6的完整链路）
+mvp_cn/outputs/research_documentation/02_DAY2_2026-06-23.md,15,heading,,一、探索时间线,一、探索时间线
+mvp_cn/outputs/research_documentation/02_DAY2_2026-06-23.md,35,heading,,二、核心实验详情,二、核心实验详情
+mvp_cn/outputs/research_documentation/02_DAY2_2026-06-23.md,37,heading,,2.1 高频自适应轮动,2.1 高频自适应轮动
+mvp_cn/outputs/research_documentation/02_DAY2_2026-06-23.md,64,heading,,2.2 ETF系统性筛选,2.2 ETF系统性筛选
+mvp_cn/outputs/research_documentation/02_DAY2_2026-06-23.md,69,bullet,,2.2 ETF系统性筛选,`ak.fund_etf_spot_em()` + `ak.fund_etf_category_sina()` → 1567只ETF
+mvp_cn/outputs/research_documentation/02_DAY2_2026-06-23.md,70,bullet,,2.2 ETF系统性筛选,关键词筛选(消费/医药/科技/金融/能源/军工等) → 730只行业ETF
+mvp_cn/outputs/research_documentation/02_DAY2_2026-06-23.md,74,bullet,,2.2 ETF系统性筛选,`data/raw/sina/` → 226只已缓存ETF
+mvp_cn/outputs/research_documentation/02_DAY2_2026-06-23.md,99,heading,,2.3 gap_return_20 因子验证,2.3 gap_return_20 因子验证
+mvp_cn/outputs/research_documentation/02_DAY2_2026-06-23.md,104,bullet,,2.3 gap_return_20 因子验证,3训练窗口(滚动5年/8年/扩展) × 2因子集(基准5/基准+gap)
+mvp_cn/outputs/research_documentation/02_DAY2_2026-06-23.md,105,bullet,,2.3 gap_return_20 因子验证,扩展窗口ΔSharpe=+0.13（但扩展窗口用全部历史数据—存在look-ahead）
+mvp_cn/outputs/research_documentation/02_DAY2_2026-06-23.md,106,bullet,,2.3 gap_return_20 因子验证,"滚动5年ΔSharpe=+0.07, 滚动8年ΔSharpe=-0.01"
+mvp_cn/outputs/research_documentation/02_DAY2_2026-06-23.md,109,bullet,,2.3 gap_return_20 因子验证,"墙=2022-12-31, 墙前决策ΔSharpe=+0.03 → ADOPT"
+mvp_cn/outputs/research_documentation/02_DAY2_2026-06-23.md,110,bullet,,2.3 gap_return_20 因子验证,墙后锁定模型验证 → Sharpe=1.24 (vs CSI300 0.55)
+mvp_cn/outputs/research_documentation/02_DAY2_2026-06-23.md,120,heading,,2.4 12ETF长历史扩展 → 发现核心规律,2.4 12ETF长历史扩展 → 发现核心规律
+mvp_cn/outputs/research_documentation/02_DAY2_2026-06-23.md,149,heading,,2.5 8ETF优化组合,2.5 8ETF优化组合
+mvp_cn/outputs/research_documentation/02_DAY2_2026-06-23.md,179,heading,,2.6 证券-银行相关性检验,2.6 证券-银行相关性检验
+mvp_cn/outputs/research_documentation/02_DAY2_2026-06-23.md,197,heading,,2.7 三策略机制拆解对比,2.7 三策略机制拆解对比
+mvp_cn/outputs/research_documentation/02_DAY2_2026-06-23.md,209,heading,,2.8 完整因子筛选全链路,2.8 完整因子筛选全链路
+mvp_cn/outputs/research_documentation/02_DAY2_2026-06-23.md,237,heading,,2.9 Alpha交叉验证,2.9 Alpha交叉验证
+mvp_cn/outputs/research_documentation/02_DAY2_2026-06-23.md,253,heading,,2.10 新维度因子探索,2.10 新维度因子探索
+mvp_cn/outputs/research_documentation/02_DAY2_2026-06-23.md,277,heading,,2.11 多墙稳健性检验 (最终判定),2.11 多墙稳健性检验 (最终判定)
+mvp_cn/outputs/research_documentation/02_DAY2_2026-06-23.md,294,heading,,三、今日方法论创新,三、今日方法论创新
+mvp_cn/outputs/research_documentation/02_DAY2_2026-06-23.md,296,heading,,"3.1 POOS墙 (vs 昨日""冻结期"")","3.1 POOS墙 (vs 昨日""冻结期"")"
+mvp_cn/outputs/research_documentation/02_DAY2_2026-06-23.md,300,heading,,3.2 机制拆解 (Full/NoTrend/TrendOnly),3.2 机制拆解 (Full/NoTrend/TrendOnly)
+mvp_cn/outputs/research_documentation/02_DAY2_2026-06-23.md,303,heading,,3.3 因子筛选全管道,3.3 因子筛选全管道
+mvp_cn/outputs/research_documentation/02_DAY2_2026-06-23.md,306,heading,,3.4 多墙区间报告 (vs 单点Sharpe),3.4 多墙区间报告 (vs 单点Sharpe)
+mvp_cn/outputs/research_documentation/02_DAY2_2026-06-23.md,312,heading,,四、失败探索及其价值,四、失败探索及其价值
+mvp_cn/outputs/research_documentation/02_DAY2_2026-06-23.md,325,heading,,五、最终推荐,五、最终推荐
+mvp_cn/outputs/research_documentation/02_DAY2_2026-06-23.md,341,heading,,六、文件索引,六、文件索引
+mvp_cn/outputs/research_documentation/03_FILE_MANIFEST.md,1,heading,,03 - 文件版本清单,03 - 文件版本清单
+mvp_cn/outputs/research_documentation/03_FILE_MANIFEST.md,3,heading,,A. 核心回测脚本 (按创建时间),A. 核心回测脚本 (按创建时间)
+mvp_cn/outputs/research_documentation/03_FILE_MANIFEST.md,28,heading,,B. 全面稳健性检验脚本 (版本演进),B. 全面稳健性检验脚本 (版本演进)
+mvp_cn/outputs/research_documentation/03_FILE_MANIFEST.md,41,heading,,C. 输出数据文件 (按重要性),C. 输出数据文件 (按重要性)
+mvp_cn/outputs/research_documentation/03_FILE_MANIFEST.md,59,heading,,D. 配置与原始数据,D. 配置与原始数据
+mvp_cn/outputs/research_documentation/03_FILE_MANIFEST.md,71,heading,,E. Bug修复记录,E. Bug修复记录
+mvp_cn/outputs/research_documentation/04_METHODOLOGY.md,1,heading,,04 - 方法论演进,04 - 方法论演进
+mvp_cn/outputs/research_documentation/04_METHODOLOGY.md,3,heading,,1. POOS (Pseudo Out-of-Sample) 框架,1. POOS (Pseudo Out-of-Sample) 框架
+mvp_cn/outputs/research_documentation/04_METHODOLOGY.md,5,heading,,核心原则,核心原则
+mvp_cn/outputs/research_documentation/04_METHODOLOGY.md,7,bullet,,核心原则,墙前(≤wall)：因子筛选、模型选择、超参数调优
+mvp_cn/outputs/research_documentation/04_METHODOLOGY.md,10,heading,,实施,实施
+mvp_cn/outputs/research_documentation/04_METHODOLOGY.md,17,heading,,多墙稳健性,多墙稳健性
+mvp_cn/outputs/research_documentation/04_METHODOLOGY.md,19,bullet,,多墙稳健性,每个墙独立做因子筛选+模型训练+POOS评估
+mvp_cn/outputs/research_documentation/04_METHODOLOGY.md,20,bullet,,多墙稳健性,全墙正向 = 结论稳健
+mvp_cn/outputs/research_documentation/04_METHODOLOGY.md,22,heading,,2. 机制拆解 (Decomposition),2. 机制拆解 (Decomposition)
+mvp_cn/outputs/research_documentation/04_METHODOLOGY.md,24,heading,,方法,方法
+mvp_cn/outputs/research_documentation/04_METHODOLOGY.md,26,bullet,,方法,Full: 完整策略(因子+趋势过滤)
+mvp_cn/outputs/research_documentation/04_METHODOLOGY.md,27,bullet,,方法,NoTrend: 仅因子，无180MA过滤
+mvp_cn/outputs/research_documentation/04_METHODOLOGY.md,28,bullet,,方法,TrendOnly: 仅180MA等权，无因子
+mvp_cn/outputs/research_documentation/04_METHODOLOGY.md,30,heading,,计算,计算
+mvp_cn/outputs/research_documentation/04_METHODOLOGY.md,36,heading,,核心发现(12ETF),核心发现(12ETF)
+mvp_cn/outputs/research_documentation/04_METHODOLOGY.md,43,heading,,3. Walk-Forward Ridge/ElasticNet,3. Walk-Forward Ridge/ElasticNet
+mvp_cn/outputs/research_documentation/04_METHODOLOGY.md,45,heading,,流程,流程
+mvp_cn/outputs/research_documentation/04_METHODOLOGY.md,52,heading,,超参数,超参数
+mvp_cn/outputs/research_documentation/04_METHODOLOGY.md,56,bullet,,超参数,趋势过滤: 180MA
+mvp_cn/outputs/research_documentation/04_METHODOLOGY.md,58,heading,,4. 因子筛选管道,4. 因子筛选管道
+mvp_cn/outputs/research_documentation/04_METHODOLOGY.md,60,heading,,完整流程,完整流程
+mvp_cn/outputs/research_documentation/04_METHODOLOGY.md,66,heading,,关键发现,关键发现
+mvp_cn/outputs/research_documentation/04_METHODOLOGY.md,69,bullet,,关键发现,精简至2因子(mom_126+low_vol_63) → POOS +0.06 Sharpe
+mvp_cn/outputs/research_documentation/04_METHODOLOGY.md,71,heading,,5. 新维度因子构建,5. 新维度因子构建
+mvp_cn/outputs/research_documentation/04_METHODOLOGY.md,73,heading,,数据源,数据源
+mvp_cn/outputs/research_documentation/04_METHODOLOGY.md,79,heading,,评估方法,评估方法
+mvp_cn/outputs/research_documentation/04_METHODOLOGY.md,80,bullet,,评估方法,加入精简2因子(mom_126+low_vol_63)作为baseline
+mvp_cn/outputs/research_documentation/04_METHODOLOGY.md,81,bullet,,评估方法,对比POOS Sharpe的增量
+mvp_cn/outputs/research_documentation/04_METHODOLOGY.md,84,heading,,6. 性能优化,6. 性能优化
+mvp_cn/outputs/research_documentation/04_METHODOLOGY.md,86,heading,,关键优化,关键优化
+mvp_cn/outputs/research_documentation/05_FINAL_RESULTS.md,1,heading,,05 - 最终结论与数据,05 - 最终结论与数据
+mvp_cn/outputs/research_documentation/05_FINAL_RESULTS.md,3,heading,,数据集: FINAL_108_merged.csv,数据集: FINAL_108_merged.csv
+mvp_cn/outputs/research_documentation/05_FINAL_RESULTS.md,5,bullet,,数据集: FINAL_108_merged.csv,6ETF: 36组(完整) / 8ETF: 18组(base5+pure2) / 12ETF: 36组(完整)
+mvp_cn/outputs/research_documentation/05_FINAL_RESULTS.md,6,bullet,,数据集: FINAL_108_merged.csv,3截点 × 6因子 × 2模型(Ridge/ElasticNet)
+mvp_cn/outputs/research_documentation/05_FINAL_RESULTS.md,10,heading,,🏆 Top10 最高Sharpe,🏆 Top10 最高Sharpe
+mvp_cn/outputs/research_documentation/05_FINAL_RESULTS.md,27,heading,,"📊 因子排名 (6ETF Ridge, 跨3墙均值)","📊 因子排名 (6ETF Ridge, 跨3墙均值)"
+mvp_cn/outputs/research_documentation/05_FINAL_RESULTS.md,40,heading,,⚔️ Ridge vs ElasticNet (6ETF汇总),⚔️ Ridge vs ElasticNet (6ETF汇总)
+mvp_cn/outputs/research_documentation/05_FINAL_RESULTS.md,49,heading,,📦 ETF粒度排名 (Ridge汇总),📦 ETF粒度排名 (Ridge汇总)
+mvp_cn/outputs/research_documentation/05_FINAL_RESULTS.md,59,heading,,🔪 POOS截点排名 (6ETF Ridge),🔪 POOS截点排名 (6ETF Ridge)
+mvp_cn/outputs/research_documentation/05_FINAL_RESULTS.md,69,heading,,📋 最终推荐,📋 最终推荐
+mvp_cn/outputs/research_documentation/05_FINAL_RESULTS.md,81,heading,,📁 相关数据文件,📁 相关数据文件
+FINAL_REPORT.md,1,heading,,中国A股板块轮动策略研究报告,中国A股板块轮动策略研究报告
+FINAL_REPORT.md,9,heading,,1. 策略规格,1. 策略规格
+FINAL_REPORT.md,22,heading,,ETF清单,ETF清单
+FINAL_REPORT.md,35,heading,,2. 方法论,2. 方法论
+FINAL_REPORT.md,37,heading,,2.1 核心架构,2.1 核心架构
+FINAL_REPORT.md,53,heading,,2.2 POOS伪样本外检验,2.2 POOS伪样本外检验
+FINAL_REPORT.md,69,heading,,2.3 因子筛选全链路,2.3 因子筛选全链路
+FINAL_REPORT.md,94,heading,,3. 核心绩效,3. 核心绩效
+FINAL_REPORT.md,96,heading,,3.1 多墙稳健性检验 (6ETF Original-5),3.1 多墙稳健性检验 (6ETF Original-5)
+FINAL_REPORT.md,110,heading,,3.2 机制拆解,3.2 机制拆解
+FINAL_REPORT.md,120,heading,,3.3 30bp成本敏感性,3.3 30bp成本敏感性
+FINAL_REPORT.md,127,heading,,"3.4 压力测试 (2020墙后, 各市场状态)","3.4 压力测试 (2020墙后, 各市场状态)"
+FINAL_REPORT.md,139,heading,,4. 探索历程与关键发现,4. 探索历程与关键发现
+FINAL_REPORT.md,141,heading,,4.1 尝试过但未通过的方案,4.1 尝试过但未通过的方案
+FINAL_REPORT.md,153,heading,,4.2 ETF选择学理,4.2 ETF选择学理
+FINAL_REPORT.md,157,bullet,,4.2 ETF选择学理,横截面排序的有效资产数量受限于因子数量与信号噪声比
+FINAL_REPORT.md,158,bullet,,4.2 ETF选择学理,ETF越多→资产间相关性越高→有效独立投注不增加→IC被噪声淹没
+FINAL_REPORT.md,159,bullet,,4.2 ETF选择学理,"6ETF恰好覆盖最独立的6个经济驱动力, 在广度与信号强度间取得平衡"
+FINAL_REPORT.md,161,heading,,4.3 策略本质,4.3 策略本质
+FINAL_REPORT.md,170,heading,,5. 局限性与监控指标,5. 局限性与监控指标
+FINAL_REPORT.md,180,heading,,前瞻跟踪指标,前瞻跟踪指标
+FINAL_REPORT.md,182,bullet,,前瞻跟踪指标,单ETF平均权重 > 35% → 告警
+FINAL_REPORT.md,183,bullet,,前瞻跟踪指标,连续3月无ETF通过180MA → 审查趋势过滤参数
+FINAL_REPORT.md,184,bullet,,前瞻跟踪指标,月胜率连续6月 < 50% → 审查因子有效性
+FINAL_REPORT.md,189,heading,,6. 交付文件索引,6. 交付文件索引
+FINAL_REPORT.md,191,heading,,核心图表,核心图表
+FINAL_REPORT.md,202,heading,,核心代码,核心代码
+FINAL_REPORT.md,212,heading,,研究日志,研究日志
+FINAL_REPORT.md,222,heading,,7. 复现指南,7. 复现指南
+FINAL_REPORT.md,225,heading,,环境,环境
+FINAL_REPORT.md,228,heading,,运行主验证,运行主验证

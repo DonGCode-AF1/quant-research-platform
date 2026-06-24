@@ -1,0 +1,28 @@
+---
+title: "机器学习辅助的中国行业 ETF 轮动研究"
+subtitle: "低频配置框架、正则化排序与回测审查"
+author: "课程期末展示稿"
+date: "2026-06-24"
+lang: zh-CN
+bibliography: references.bib
+format:
+  html:
+    output-file: classroom_report.html
+    toc: true
+    toc-depth: 3
+    toc-location: right
+    number-sections: false
+    theme: none
+    css: report.css
+    smooth-scroll: true
+    code-fold: true
+    embed-resources: false
+    fig-align: center
+    title-block-style: none
+execute:
+  echo: false
+  warning: false
+  message: false
+---
+
+{{< include classroom_report_body.md >}}

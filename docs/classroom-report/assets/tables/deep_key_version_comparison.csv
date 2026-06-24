@@ -1,0 +1,53 @@
+﻿axis,version,source,start,end,cagr,sharpe,max_drawdown,monthly_win_rate,annual_gross_turnover,note
+6ETF/8ETF因子,ETF与因子：6只ETF+八因子等权,mvp_cn/outputs/eight_etf_extended/strategy_metrics_extended.csv,2017-09-20,2026-06-18,0.1915520137068347,0.8971111896665375,-0.2062909963159269,0.6320754716981132,6.4498505369990005,6ETF_8因子等权
+6ETF/8ETF因子,ETF与因子：6只ETF+八因子Ridge,mvp_cn/outputs/eight_etf_extended/strategy_metrics_extended.csv,2017-09-20,2026-06-18,0.142289283868082,0.731486167451896,-0.2062909963159281,0.5283018867924528,8.639651887608323,6ETF_8因子Ridge
+6ETF/8ETF因子,ETF与因子：8只ETF+八因子Ridge,mvp_cn/outputs/eight_etf_extended/strategy_metrics_extended.csv,2017-09-20,2026-06-18,0.1135621071711252,0.6757350455947655,-0.2258122196574195,0.4339622641509434,7.611894199144823,8ETF_8因子Ridge
+6ETF/8ETF因子,ETF与因子：6只ETF+原始五因子Ridge,mvp_cn/outputs/eight_etf_extended/strategy_metrics_extended.csv,2017-09-20,2026-06-18,0.1314281240212622,0.6753416606498218,-0.2744613329497495,0.5471698113207547,7.135514571931691,6ETF_5因子Ridge
+6ETF/8ETF因子,ETF与因子：8只ETF+原始五因子Ridge,mvp_cn/outputs/eight_etf_extended/strategy_metrics_extended.csv,2017-09-20,2026-06-18,0.1106116633549127,0.6394767440134956,-0.3035247241596626,0.4056603773584906,6.5008271405093385,8ETF_5因子Ridge
+6ETF/8ETF因子,ETF与因子：8只ETF+八因子等权,mvp_cn/outputs/eight_etf_extended/strategy_metrics_extended.csv,2017-09-20,2026-06-18,0.0957590777487382,0.5078030962033556,-0.2511951658314597,0.4811320754716981,8.907271070082171,8ETF_8因子等权
+6ETF/8ETF因子,ETF与因子：8ETF等权,mvp_cn/outputs/eight_etf_extended/strategy_metrics_extended.csv,2017-09-20,2026-06-18,0.0601598690732452,0.3914013487590387,-0.3096555253544065,0.5283018867924528,0.0,8ETF等权
+6ETF/8ETF因子,ETF与因子：沪深300ETF,mvp_cn/outputs/eight_etf_extended/strategy_metrics_extended.csv,2017-09-20,2026-06-18,0.0505251092051546,0.3483009242882121,-0.4215702301031365,0.5377358490566038,0.0,沪深300ETF
+90组规格,6只ETF Ridge｜加入融资变化｜2023年后验证,mvp_cn/outputs/comprehensive_robustness/FINAL_108_merged.csv,,,0.1855388222829017,1.0470077769224622,-0.1532044205019967,0.6666666666666666,,6只宽行业ETF 加入融资变化 Ridge
+90组规格,6只ETF Ridge｜加入利率利差｜2023年后验证,mvp_cn/outputs/comprehensive_robustness/FINAL_108_merged.csv,,,0.1953528915640867,0.9803155173320042,-0.1898057377502808,0.5476190476190477,,6只宽行业ETF 加入利率利差 Ridge
+90组规格,6只ETF Ridge｜加入黄金动量｜2023年后验证,mvp_cn/outputs/comprehensive_robustness/FINAL_108_merged.csv,,,0.1903026125193272,0.968395383759495,-0.1753027170402762,0.6190476190476191,,6只宽行业ETF 加入黄金动量 Ridge
+90组规格,6只ETF Ridge｜加入商品动量｜2023年后验证,mvp_cn/outputs/comprehensive_robustness/FINAL_108_merged.csv,,,0.1788804928784597,0.920883918083798,-0.191452273831977,0.5952380952380952,,6只宽行业ETF 加入商品动量 Ridge
+90组规格,6只ETF Ridge｜动量+低波动｜2023年后验证,mvp_cn/outputs/comprehensive_robustness/FINAL_108_merged.csv,,,0.1776837318118715,0.9179338734963844,-0.1616817137752422,0.5714285714285714,,6只宽行业ETF 动量+低波动 Ridge
+90组规格,6只ETF Ridge｜加入融资变化｜2019年后验证,mvp_cn/outputs/comprehensive_robustness/FINAL_108_merged.csv,,,0.1661129571108182,0.8545110338868946,-0.2594224799644388,0.6222222222222222,,6只宽行业ETF 加入融资变化 Ridge
+90组规格,6只ETF Ridge｜加入黄金动量｜2019年后验证,mvp_cn/outputs/comprehensive_robustness/FINAL_108_merged.csv,,,0.1660649694057461,0.8256377359876889,-0.2492607023174048,0.6111111111111112,,6只宽行业ETF 加入黄金动量 Ridge
+90组规格,6只ETF Ridge｜加入商品动量｜2019年后验证,mvp_cn/outputs/comprehensive_robustness/FINAL_108_merged.csv,,,0.1631440967736919,0.813786971878461,-0.2499930070302448,0.6,,6只宽行业ETF 加入商品动量 Ridge
+90组规格,6只ETF Ridge｜加入利率利差｜2019年后验证,mvp_cn/outputs/comprehensive_robustness/FINAL_108_merged.csv,,,0.1593123479120539,0.8042762081176459,-0.3201200442972333,0.5666666666666667,,6只宽行业ETF 加入利率利差 Ridge
+90组规格,6只ETF Ridge｜加入黄金动量｜2021年后验证,mvp_cn/outputs/comprehensive_robustness/FINAL_108_merged.csv,,,0.1499686385481713,0.7682098167190136,-0.2492607023174047,0.5970149253731343,,6只宽行业ETF 加入黄金动量 Ridge
+90组规格,6只ETF Ridge｜加入商品动量｜2021年后验证,mvp_cn/outputs/comprehensive_robustness/FINAL_108_merged.csv,,,0.1430274100893196,0.7397365654694745,-0.2499930070302459,0.582089552238806,,6只宽行业ETF 加入商品动量 Ridge
+90组规格,6只ETF Ridge｜动量+低波动｜2019年后验证,mvp_cn/outputs/comprehensive_robustness/FINAL_108_merged.csv,,,0.1411051596332355,0.724873743285249,-0.2950914728549506,0.5666666666666667,,6只宽行业ETF 动量+低波动 Ridge
+90组规格,6只ETF Ridge｜加入利率利差｜2021年后验证,mvp_cn/outputs/comprehensive_robustness/FINAL_108_merged.csv,,,0.1374330396642187,0.7141808683655857,-0.3201200442972322,0.5223880597014925,,6只宽行业ETF 加入利率利差 Ridge
+90组规格,6只ETF Ridge｜加入融资变化｜2021年后验证,mvp_cn/outputs/comprehensive_robustness/FINAL_108_merged.csv,,,0.1222472738486575,0.6846987829862721,-0.2594224799644388,0.6119402985074627,,6只宽行业ETF 加入融资变化 Ridge
+90组规格,6只ETF Ridge｜动量+低波动｜2021年后验证,mvp_cn/outputs/comprehensive_robustness/FINAL_108_merged.csv,,,0.1293481108910641,0.6825855718796523,-0.2950914728549493,0.5671641791044776,,6只宽行业ETF 动量+低波动 Ridge
+90组规格,6只ETF Ridge｜原始五因子｜2023年后验证,mvp_cn/outputs/comprehensive_robustness/FINAL_108_merged.csv,,,0.1019331336667765,0.638429699416781,-0.1801014802981952,0.5952380952380952,,6只宽行业ETF 原始五因子 Ridge
+90组规格,6只ETF Ridge｜原始五因子｜2019年后验证,mvp_cn/outputs/comprehensive_robustness/FINAL_108_merged.csv,,,0.1024340865953117,0.5962819264055991,-0.3933073249150187,0.5555555555555556,,6只宽行业ETF 原始五因子 Ridge
+90组规格,6只ETF Ridge｜原始五因子｜2021年后验证,mvp_cn/outputs/comprehensive_robustness/FINAL_108_merged.csv,,,0.0077646463579525,0.134968592531483,-0.3933073249150191,0.5373134328358209,,6只宽行业ETF 原始五因子 Ridge
+ETF宇宙,ETF池比较：6只宽行业ETF,mvp_cn/outputs/granularity/granularity_metrics.csv,,,0.151184,0.793572,-0.218872,0.564885,6.381416,粗粒度_6只
+ETF宇宙,ETF池比较：16只中粒度ETF,mvp_cn/outputs/granularity/granularity_metrics.csv,,,0.078746,0.449993,-0.459359,0.481928,9.516414,中粒度_16只
+ETF宇宙,ETF池比较：22只细分ETF,mvp_cn/outputs/granularity/granularity_metrics.csv,,,0.02149,0.208264,-0.475259,0.421053,9.541823,细粒度_22只
+基线与调仓,Day1基线：月中调仓+增强因子,mvp_cn/outputs/ma180_final/ma180_final_metrics.csv,,,0.161164,0.835658,-0.206291,0.580153,6.302406,月中15日_增强因子
+基线与调仓,Day1基线：月中调仓+原始因子,mvp_cn/outputs/ma180_final/ma180_final_metrics.csv,,,0.151287,0.791168,-0.208412,0.572519,5.754448,月中15日_原因子
+基线与调仓,Day1基线：月末调仓+原始因子,mvp_cn/outputs/ma180_final/ma180_final_metrics.csv,,,0.140727,0.738205,-0.301998,0.546154,6.152414,月末_原因子
+多算法,算法比较：历史正IC加权,mvp_cn/outputs/algorithm_comparison_tests/algorithm_summary.csv,,,0.2673788511617092,1.210337009898326,-0.2785673649076459,0.6783838383838383,4.744506196849835,历史正IC加权
+多算法,算法比较：等权Z分数,mvp_cn/outputs/algorithm_comparison_tests/algorithm_summary.csv,,,0.263157716060923,1.1935659210352294,-0.2785673649076483,0.6753535353535354,4.802403724842289,等权Z分数
+多算法,算法比较：Rank投票,mvp_cn/outputs/algorithm_comparison_tests/algorithm_summary.csv,,,0.2610623862041273,1.187076265825335,-0.263118477169362,0.6783838383838383,4.903465634225785,Rank投票
+多算法,算法比较：Ridge,mvp_cn/outputs/algorithm_comparison_tests/algorithm_summary.csv,,,0.2168746302642949,1.063405325151329,-0.2785673649076446,0.6554593554593555,6.570804097875035,Ridge
+多算法,算法比较：Elastic Net,mvp_cn/outputs/algorithm_comparison_tests/algorithm_summary.csv,,,0.2250898562259763,1.05975528666986,-0.2785673649076462,0.6513708513708514,6.423110271311364,Elastic Net
+多算法,算法比较：Lasso,mvp_cn/outputs/algorithm_comparison_tests/algorithm_summary.csv,,,0.2238778146727877,1.0511456292445238,-0.2785673649076462,0.6524963924963926,6.48143970804265,Lasso
+最终收束,最终比较：八因子等权探索版,mvp_cn/outputs/final_converged_compare/comparison_metrics.csv,2018-03-22,2026-06-18,0.1984989651293569,0.9108451599312058,-0.2062909963159273,0.64,6.530988032795635,昨日探索版_Enhanced8
+最终收束,最终比较：八因子Ridge版,mvp_cn/outputs/final_converged_compare/comparison_metrics.csv,2018-03-22,2026-06-18,0.1450267019164595,0.728764006770101,-0.2062909963159274,0.55,8.930804442754015,8因子_Ridge
+最终收束,最终比较：最终Ridge收束版,mvp_cn/outputs/final_converged_compare/comparison_metrics.csv,2018-03-22,2026-06-18,0.1397191272232079,0.6952310843371576,-0.2744613329497488,0.58,7.416695266719127,最新收束版_Ridge5
+最终收束,最终比较：6只行业ETF等权,mvp_cn/outputs/final_converged_compare/comparison_metrics.csv,2018-03-22,2026-06-18,0.0731154181408844,0.4675855137486041,-0.2714272163762595,0.57,,6ETF等权
+最终收束,最终比较：沪深300ETF,mvp_cn/outputs/final_converged_compare/comparison_metrics.csv,2018-03-22,2026-06-18,0.0471167277932749,0.3305199384585396,-0.4215702301031376,0.54,,沪深300ETF
+算法与窗口,Elastic Net｜扩展窗口,mvp_cn/outputs/model_comparison/training_window_robustness.csv,2020-06-22,2026-06-18,0.2293565197740967,1.029695779528342,-0.2403554352376993,0.6301369863013698,8.777973091934214,elastic_net
+算法与窗口,Elastic Net｜滚动8年,mvp_cn/outputs/model_comparison/training_window_robustness.csv,2020-06-22,2026-06-18,0.2191169752533592,0.98752760042076,-0.2403554352376993,0.6301369863013698,8.130748048679349,elastic_net
+算法与窗口,LASSO筛选后Ridge｜扩展窗口,mvp_cn/outputs/model_comparison/training_window_robustness.csv,2020-06-22,2026-06-18,0.2095086155602463,0.9550801347929336,-0.254759522870607,0.6301369863013698,8.86170046433494,stability_lasso_ridge
+算法与窗口,LASSO筛选后Ridge｜滚动8年,mvp_cn/outputs/model_comparison/training_window_robustness.csv,2020-06-22,2026-06-18,0.2052927598683191,0.9369311521327164,-0.254759522870607,0.589041095890411,8.468370773180357,stability_lasso_ridge
+算法与窗口,Ridge五因子｜滚动8年,mvp_cn/outputs/model_comparison/training_window_robustness.csv,2020-06-22,2026-06-18,0.2030401652313047,0.9233392934909476,-0.2403554352376996,0.589041095890411,6.379552775084287,ridge5_quarterly
+算法与窗口,LASSO筛选后Ridge｜滚动5年,mvp_cn/outputs/model_comparison/training_window_robustness.csv,2020-06-22,2026-06-18,0.1938970820693628,0.9105639228905366,-0.2668908860695871,0.6164383561643836,8.840376628839046,stability_lasso_ridge
+算法与窗口,Elastic Net｜滚动5年,mvp_cn/outputs/model_comparison/training_window_robustness.csv,2020-06-22,2026-06-18,0.1905241757868341,0.8984047399325376,-0.248040624385092,0.6164383561643836,8.782089852914178,elastic_net
+算法与窗口,Ridge五因子｜滚动5年,mvp_cn/outputs/model_comparison/training_window_robustness.csv,2020-06-22,2026-06-18,0.1906074776715196,0.8818132296712773,-0.2403554352376996,0.589041095890411,6.402207362075732,ridge5_quarterly
+算法与窗口,Ridge五因子｜扩展窗口,mvp_cn/outputs/model_comparison/training_window_robustness.csv,2020-06-22,2026-06-18,0.1730097880708527,0.818659563834266,-0.2403554352376996,0.589041095890411,7.055549788833258,ridge5_quarterly

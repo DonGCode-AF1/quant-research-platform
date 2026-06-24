@@ -1,0 +1,316 @@
+---
+title: "在噪声与约束之间"
+subtitle: "从机器学习直觉到可审计的 ETF 轮动研究"
+author: "课程期末项目组"
+date: "2026-06-24"
+lang: zh
+bibliography: references.bib
+format:
+  revealjs:
+    theme: [default, custom.scss]
+    slide-number: c/t
+    transition: fade
+    background-transition: fade
+    navigation-mode: linear
+    controls-layout: edges
+    controls-tutorial: false
+    progress: true
+    center: false
+    width: 1600
+    height: 900
+    margin: 0.06
+    footer: "中国行业 ETF 轮动研究 · 可复现课程项目"
+    html-math-method: mathjax
+execute:
+  echo: false
+  warning: false
+---
+
+## 我们交付的不是“神奇模型”
+
+::: {.lead-statement}
+我们用机器学习、工程约束和反复审计，把一个行业 ETF 轮动直觉转化为可复现、可解释、可反思的研究流程。
+:::
+
+最后的重点不是证明稳定盈利，而是说明：哪些直觉被证据保留，哪些被证据修正。
+
+## 研究问题
+
+::: {.two-col}
+:::{}
+### 初始直觉
+- 行业状态可能具有中期延续性
+- 机器学习可能帮助整合弱信号
+- ETF轮动可以成为小资金可执行场景
+:::
+:::{}
+### 研究边界
+- 不做个股层面高维预测
+- 不把回测写成未来收益承诺
+- 不把预测关系解释成因果关系
+:::
+:::
+
+## 为什么选择行业 ETF
+
+- 个股噪声大：事件、财务口径、停复牌、行业归属都更复杂。
+- ETF可交易：低维、流动性较好、行业含义清楚。
+- 中低频可执行：更贴近 T+1、小额资金和交易费用约束。
+
+![探索路线图](assets/figures/research_roadmap_final.png){.wide-img}
+
+# 理论基础接口 {.section-slide}
+
+## 学术谱系
+
+| 分支 | 在本项目中的作用 |
+|---|---|
+| 风险因子 | 提供收益解释语言 |
+| 动量效应 | 支持收益延续性的经验直觉 |
+| 行业动量 | 把持续性放到行业层面 |
+| 时间序列动量 | 支持趋势过滤规则 |
+| 正则化模型 | 在弱信号中收缩和筛选 |
+
+::: {.small}
+理论基础由协作者补全。本展示只保留衔接接口。
+:::
+
+## 我们的位置
+
+::: {.lead-statement}
+行业动量 + 趋势跟踪 + 正则化预测。
+:::
+
+更像低频行业 beta 择时系统，而不是纯 alpha 挖掘器。
+
+# 工程化构建 {.section-slide}
+
+## 约束优化视角
+
+\[
+\max_w \; \text{RiskAdjustedReturn}(w)
+\]
+
+约束包括：
+
+- T+1 执行
+- 交易费用
+- 低频调仓
+- 有限 ETF 池
+- 持仓数量与趋势过滤
+
+## 策略流水线
+
+::: {.lead-statement}
+特征构造 → 横截面标准化 → 正则化预测 → 相对排序 → 趋势过滤 → Top-K → 下一交易日执行
+:::
+
+机器学习只提供排序分数，交易规则决定能否落地。
+
+## 数据与限制
+
+- AkShare 新浪 ETF 日频：价格、成交额、覆盖期。
+- mootdx：补充行情接口。
+- 外部变量：黄金、SHIBOR、融资、商品、研报等。
+- 免费接口不是严格点时数据库，宏观和新闻变量尤其要谨慎。
+
+# 探索过程 {.section-slide}
+
+## 项目不是线性优化
+
+::: {.lead-statement}
+我们先扩张，再被证据迫使收缩。
+:::
+
+DeepSeek 打包探索包记录了两天主线：Day 1 建立低频基线；Day 2 系统审计频率、ETF池、因子、模型和稳健性。
+
+## 核心版本对照
+
+![核心版本对照](assets/figures/deep_key_version_comparison.png){.wide-img}
+
+::: {.figure-caption}
+不同实验口径用于展示探索量级，严格比较在后续分组图中完成。
+:::
+
+# 因子：从扩张到治理 {.section-slide}
+
+## 初始五因子
+
+| 因子方向 | 经济含义 |
+|---|---|
+| 中期动量 | 行业状态延续 |
+| 长期动量 | 趋势强弱 |
+| 趋势质量 | 趋势是否平滑 |
+| 低波动 | 风险调整后的稳定性 |
+
+## 候选因子不是越多越好
+
+![候选因子IC与冗余度](assets/figures/rep_factor_ic_redundancy.png){.wide-img}
+
+## 分期稳定性更重要
+
+![候选因子分期IC](assets/figures/candidate_subperiod_ic_heatmap.png){.wide-img}
+
+## LASSO不是经济真理
+
+![LASSO与Ridge的接力](assets/figures/rep_lasso_ridge_poos.png){.wide-img}
+
+::: {.figure-caption}
+筛选之后仍需要重新做样本外验证。
+:::
+
+# 模型与训练窗口 {.section-slide}
+
+## 三种正则化方法
+
+| 方法 | 直观解释 | 风险 |
+|---|---|---|
+| Ridge | 所有因子都保留，但系数收缩 | 不自动筛选 |
+| LASSO | 把部分系数压为零 | 相关因子间选择不稳定 |
+| Elastic Net | 在 Ridge 与 LASSO 之间折中 | 仍需验证窗口稳健性 |
+
+## 训练窗口本身就是规格风险
+
+![滚动训练和扩展窗口](assets/figures/deep_training_window_diagram.png){.wide-img}
+
+## 简单集成也有竞争力
+
+![简单集成算法比较](assets/figures/deep_algorithm_equal_weight_surprise.png){.wide-img}
+
+::: {.figure-caption}
+这不是否定机器学习，而是说明弱信号环境下，稳健收缩比模型复杂度更重要。
+:::
+
+# ETF池与交易频率 {.section-slide}
+
+## ETF池不是越宽越好
+
+![ETF池规格分布](assets/figures/deep_final_90_spec_summary.png){.wide-img}
+
+## 细分ETF没有稳定压过宽行业ETF
+
+![8ETF/12ETF比较](assets/figures/rep_8etf_vs_6etf.png){.wide-img}
+
+## 频率越高，换手越快出现
+
+![三条反直觉规律](assets/figures/deep_not_more_triptych.png){.wide-img}
+
+## 180MA不是神奇参数
+
+![180MA相对200MA](assets/figures/rep_why_180_beats_200.png){.wide-img}
+
+::: {.figure-caption}
+更合理的解释是：A股行业趋势的有效周期可能略短于经典200日规则。
+:::
+
+# 关键结果 {.section-slide}
+
+## 主结果要看相对大盘
+
+![相对大盘的价值](assets/figures/deep_excess_over_benchmark.png){.wide-img}
+
+## 主要指标
+
+| 序列 | 年化收益 | Sharpe | 最大回撤 |
+|---|---:|---:|---:|
+| 最终Ridge收束版 | 14.0% | 0.70 | -27.4% |
+| 沪深300ETF | 4.7% | 0.33 | -42.2% |
+| 6只行业ETF等权 | 7.3% | 0.47 | -27.3% |
+
+::: {.small}
+区间：2018-03 至 2026-06，日频净收益。回撤采用初始净值1.0作为峰值的标准水下曲线口径。
+:::
+
+## 机制拆解改变解释
+
+![机制拆解](assets/figures/deep_component_decomposition.png){.wide-img}
+
+::: {.lead-statement}
+趋势过滤控制主要暴露，因子排序负责相对选择。
+:::
+
+# 稳健性审计 {.section-slide}
+
+## POOS是什么
+
+::: {.two-col}
+:::{}
+### 墙前
+因子筛选、模型选择、超参数调试。
+:::
+:::{}
+### 墙后
+锁定规则，只评价，不再改模型。
+:::
+:::
+
+POOS不是真正未来，但能减少同一历史区间反复调参带来的自我欺骗。
+
+## 固定策略的评价起点敏感性
+
+![半年墙敏感性](assets/figures/deep_halfyear_wall_sensitivity.png){.wide-img}
+
+::: {.figure-caption}
+这不是重新训练版POOS，而是固定最终规则后改变评价起点。
+:::
+
+## 多墙审计
+
+![多墙方案审计](assets/figures/deep_wall_scheme_heatmap.png){.wide-img}
+
+::: {.figure-caption}
+读横向稳定性，而不是只找单一最优格子。
+:::
+
+# 反思与解释 {.section-slide}
+
+## 为什么不是越多越好
+
+- 因子更多：共线性和噪声增加。
+- ETF更多：独立经济信息没有同步增加。
+- 频率更高：交易成本和换手更快放大。
+
+::: {.lead-statement}
+有效信息少于候选复杂度。
+:::
+
+## 市场状态切分应放在限制里
+
+![市场状态切分](assets/figures/deep_market_regime_comparison.png){.wide-img}
+
+::: {.figure-caption}
+它说明策略依赖可延续的市场状态，不应作为全状态有效的证明。
+:::
+
+## 机器学习发挥了什么作用
+
+| 作用 | 解释 |
+|---|---|
+| 去噪 | 收缩弱信号中的极端系数 |
+| 筛选 | 发现冗余因子，但不替代验证 |
+| 审计 | 比较窗口、wall、ETF池和算法 |
+| 约束自由度 | 把直觉变成可复查表格和图 |
+
+# 不足与下一步 {.section-slide}
+
+## 研究不足
+
+- 免费接口不是点时数据库。
+- ETF历史短、横截面小。
+- 多次探索带来研究者自由度。
+- 因子 alpha 仍不够满意。
+
+## 下一步
+
+- 先解决数据审计，再尝试更复杂模型。
+- 用 AI 辅助生成更有经济含义的新因子。
+- 在股票层面用更大样本重新验证。
+- 开发中低频邮件联动交易方案。
+- 清理跨 AI 协作留下的冗余脚本和输出。
+
+## 结论
+
+::: {.closing-statement}
+这项研究的收获不是“机器学习找到了稳定赚钱公式”，而是我们学会了把一个金融直觉放进数据、交易约束和审计流程里，让它能够被解释、被质疑、也被继续改进。
+:::
+

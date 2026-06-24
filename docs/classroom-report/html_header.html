@@ -1,0 +1,28 @@
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  document.querySelectorAll("pre.mermaid, pre.sourceCode.mermaid").forEach(function (pre) {
+    var code = pre.querySelector("code");
+    var div = document.createElement("div");
+    div.className = "mermaid";
+    div.textContent = code ? code.textContent : pre.textContent;
+    pre.replaceWith(div);
+  });
+  if (window.mermaid) {
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: "base",
+      themeVariables: {
+        background: "#fffdf8",
+        primaryColor: "#e9eff8",
+        primaryTextColor: "#162b3d",
+        primaryBorderColor: "#607466",
+        lineColor: "#8c3f45",
+        secondaryColor: "#f0e8d9",
+        tertiaryColor: "#fffdf8",
+        fontFamily: "Microsoft YaHei, Noto Sans CJK SC, sans-serif"
+      }
+    });
+  }
+});
+</script>

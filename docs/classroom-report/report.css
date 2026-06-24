@@ -1,0 +1,386 @@
+:root {
+  --paper: #f7f3ea;
+  --panel: #fffdf8;
+  --ink: #162b3d;
+  --text: #263442;
+  --muted: #697482;
+  --rule: #d7ccba;
+  --rule-soft: #ece4d6;
+  --accent: #8c3f45;
+  --gold: #a98754;
+  --sage: #607466;
+  --blue-soft: #e9eff8;
+  --shadow: 0 18px 50px rgba(22, 43, 61, 0.08);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background:
+    linear-gradient(90deg, rgba(22, 43, 61, 0.025) 1px, transparent 1px),
+    linear-gradient(rgba(22, 43, 61, 0.018) 1px, transparent 1px),
+    var(--paper);
+  background-size: 84px 84px;
+  color: var(--text);
+  font-family: "Noto Sans CJK SC", "Source Han Sans SC", "Microsoft YaHei", "PingFang SC", sans-serif;
+  letter-spacing: 0;
+  margin: 0;
+  padding: 0 1.2rem 3rem;
+}
+
+#quarto-content {
+  gap: 2rem;
+}
+
+main.content {
+  max-width: 1060px;
+  background: rgba(255, 253, 248, 0.72);
+  border: 1px solid rgba(215, 204, 186, 0.72);
+  box-shadow: var(--shadow);
+  padding: 3.2rem 4rem 4rem;
+  margin-top: 2rem;
+  margin-bottom: 3rem;
+}
+
+body > header,
+#title-block-header,
+.quarto-title-block {
+  display: none;
+}
+
+body > h1,
+body > h2,
+body > h3,
+body > h4,
+body > p,
+body > ul,
+body > ol,
+body > blockquote,
+body > table,
+body > figure,
+body > pre,
+body > div.sourceCode,
+body > hr {
+  max-width: 1060px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  color: var(--ink);
+  font-family: "Noto Serif CJK SC", "Source Han Serif SC", "Songti SC", SimSun, serif;
+  font-weight: 700;
+  letter-spacing: 0;
+}
+
+h1 {
+  font-size: 2.35rem;
+  line-height: 1.18;
+  margin-top: 2.2rem;
+  margin-bottom: 0.75rem;
+}
+
+h1 + h2 {
+  color: var(--accent);
+  font-size: 1.18rem;
+  border: 0;
+  margin-top: 0;
+  padding-bottom: 1.2rem;
+}
+
+h2 {
+  font-size: 1.68rem;
+  margin-top: 3rem;
+  padding-bottom: 0.45rem;
+  border-bottom: 2px solid var(--ink);
+}
+
+h2::after {
+  content: "";
+  display: block;
+  width: 5.2rem;
+  height: 0.18rem;
+  margin-top: 0.45rem;
+  background: var(--accent);
+}
+
+h3 {
+  font-size: 1.18rem;
+  margin-top: 2rem;
+  color: #1f3f5c;
+}
+
+h4 {
+  font-size: 1rem;
+  margin-top: 1.35rem;
+  color: var(--accent);
+}
+
+p {
+  line-height: 1.86;
+  margin-top: 0.85rem;
+  margin-bottom: 0.85rem;
+}
+
+a {
+  color: var(--accent);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
+strong {
+  color: var(--ink);
+}
+
+blockquote,
+.note {
+  color: #4f5962;
+  background: #f0e8d9;
+  border-left: 5px solid var(--gold);
+  padding: 0.85rem 1.1rem;
+  margin-top: 1.2rem;
+  margin-bottom: 1.2rem;
+}
+
+code {
+  color: #7a3740;
+  background: #f2eadc;
+  border-radius: 4px;
+  padding: 0.1rem 0.28rem;
+}
+
+pre code {
+  color: inherit;
+  background: transparent;
+  padding: 0;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  margin: 1.15rem auto 0.8rem;
+  border: 1px solid var(--rule);
+  background: var(--panel);
+  box-shadow: 0 10px 32px rgba(22, 43, 61, 0.06);
+}
+
+p:has(> img) {
+  margin-top: 1.4rem;
+  margin-bottom: 1.8rem;
+}
+
+figure {
+  margin-top: 1.35rem;
+  margin-bottom: 1.9rem;
+}
+
+figcaption,
+.figure-caption {
+  color: var(--muted);
+  font-size: 0.92rem;
+  text-align: center;
+}
+
+table {
+  width: 100%;
+  margin-top: 1.1rem;
+  margin-bottom: 1.7rem;
+  border-collapse: collapse;
+  font-size: 0.94rem;
+  background: var(--panel);
+  box-shadow: 0 8px 28px rgba(22, 43, 61, 0.045);
+}
+
+thead {
+  background: var(--ink);
+  color: #fbf6ee;
+}
+
+th,
+td {
+  border: 1px solid var(--rule-soft);
+  padding: 0.62rem 0.72rem;
+  vertical-align: top;
+}
+
+tbody tr:nth-child(even) {
+  background: #f6efe3;
+}
+
+tbody tr:hover {
+  background: var(--blue-soft);
+}
+
+.cell-output-display {
+  overflow-x: auto;
+}
+
+#quarto-margin-sidebar {
+  padding-top: 2rem;
+}
+
+#TOC {
+  position: sticky;
+  top: 1.25rem;
+  max-height: calc(100vh - 2.5rem);
+  overflow-y: auto;
+  background: rgba(255, 253, 248, 0.9);
+  border: 1px solid rgba(215, 204, 186, 0.86);
+  border-left: 4px solid var(--accent);
+  box-shadow: 0 14px 38px rgba(22, 43, 61, 0.08);
+  padding: 1rem 0.9rem 1.05rem;
+}
+
+body > nav#TOC {
+  position: static;
+  max-width: 1060px;
+  max-height: none;
+  margin: 1.8rem auto 2.2rem;
+  padding: 1.15rem 1.35rem 1.25rem;
+  overflow: visible;
+  border-left: 0;
+  border-top: 4px solid var(--accent);
+}
+
+#TOC::before {
+  content: "\76EE\5F55";
+  display: block;
+  color: var(--ink);
+  font-family: "Noto Serif CJK SC", "Source Han Serif SC", "Songti SC", SimSun, serif;
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: 0;
+  padding: 0 0.35rem 0.55rem;
+  margin-bottom: 0.45rem;
+  border-bottom: 1px solid var(--rule);
+}
+
+#TOC ul {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+body > nav#TOC > ul {
+  column-count: 2;
+  column-gap: 2rem;
+}
+
+#TOC li {
+  margin: 0.08rem 0;
+  break-inside: avoid;
+}
+
+#TOC a,
+#TOC .nav-link {
+  color: var(--muted);
+  display: block;
+  line-height: 1.35;
+  border-left: 0;
+  border-radius: 0;
+  padding: 0.34rem 0.42rem;
+  font-size: 0.88rem;
+  text-decoration: none;
+}
+
+#TOC .toc-chapter > a {
+  color: var(--ink);
+  font-family: "Noto Serif CJK SC", "Source Han Serif SC", "Songti SC", SimSun, serif;
+  font-size: 0.98rem;
+  font-weight: 700;
+  padding-top: 0.5rem;
+  padding-bottom: 0.38rem;
+}
+
+#TOC .toc-section > a {
+  color: #596675;
+  font-size: 0.82rem;
+}
+
+#TOC a:hover,
+#TOC .nav-link:hover {
+  color: var(--ink);
+  background: #f4eddf;
+}
+
+#TOC a.active,
+#TOC .nav-link.active {
+  color: var(--accent);
+  background: #f0e6d7;
+  font-weight: 700;
+}
+
+#TOC ul ul {
+  column-count: auto;
+  margin-top: 0.02rem;
+  margin-bottom: 0.44rem;
+  margin-left: 0.55rem;
+  padding-left: 0.55rem;
+  border-left: 1px solid var(--rule-soft);
+}
+
+#TOC ul ul a,
+#TOC ul ul .nav-link {
+  font-size: 0.8rem;
+  padding-top: 0.24rem;
+  padding-bottom: 0.24rem;
+}
+
+#TOC .toc-actions,
+#TOC .toc-title {
+  display: none;
+}
+
+.callout {
+  border-radius: 0;
+  border-color: var(--rule);
+}
+
+.math.display {
+  overflow-x: auto;
+  padding: 0.65rem 0;
+}
+
+hr {
+  border: 0;
+  border-top: 1px solid var(--rule);
+  margin-top: 2.5rem;
+  margin-bottom: 2.5rem;
+}
+
+@media (max-width: 991px) {
+  body {
+    padding-left: 0.7rem;
+    padding-right: 0.7rem;
+  }
+
+  main.content {
+    padding: 2rem 1.25rem;
+    margin-top: 0;
+    border-left: 0;
+    border-right: 0;
+  }
+
+  body > nav#TOC > ul {
+    column-count: 1;
+  }
+
+  h1 {
+    font-size: 1.9rem;
+  }
+
+  h2 {
+    font-size: 1.42rem;
+  }
+
+  table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+}

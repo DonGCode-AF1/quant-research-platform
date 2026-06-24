@@ -1,0 +1,11 @@
+.quarto/
+.quarto-cache/
+.deno/
+node_modules/
+index_files/
+_site/
+pptx_preview/
+*.quarto_ipynb
+*.inspect.ndjson
+classroom_report_test_toc.html
+_quarto_internal_scss_error.scss

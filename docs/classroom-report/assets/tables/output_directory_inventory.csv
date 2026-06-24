@@ -1,0 +1,27 @@
+﻿output_dir,file_count,csv_count,png_count,latest_modified,suffix_profile,role
+mvp_cn/outputs/second_round,49,30,16,2026-06-22 20:32:08,.csv:30; .json:2; .md:1; .png:16,第二轮组件拆解、频率、训练窗口和执行审计
+mvp_cn/outputs/figures,4,0,2,2026-06-22 21:46:29,.png:2; .svg:2,其他输出或中间过程
+mvp_cn/outputs/external_supplements,8,5,2,2026-06-22 21:52:01,.csv:5; .json:1; .png:2,宏观与外部补充因子探索
+mvp_cn/outputs/expanded,8,6,1,2026-06-22 22:13:29,.csv:6; .json:1; .png:1,其他输出或中间过程
+mvp_cn/outputs/granularity,3,2,1,2026-06-22 22:15:14,.csv:2; .png:1,6/16/22 ETF颗粒度对比
+mvp_cn/outputs/tech_rotation,3,2,1,2026-06-22 22:25:18,.csv:2; .png:1,科技内部细分轮动实验
+mvp_cn/outputs/model_comparison,25,16,7,2026-06-22 22:37:26,.csv:16; .json:2; .png:7,Ridge/LASSO/ElasticNet与训练窗口对比
+mvp_cn/outputs/crash_filter,6,5,1,2026-06-22 22:48:07,.csv:5; .png:1,崩盘过滤与200MA过滤对比
+mvp_cn/outputs/ma_regime,4,2,2,2026-06-22 22:53:40,.csv:2; .png:2,其他输出或中间过程
+mvp_cn/outputs/enhanced,24,10,9,2026-06-22 23:59:00,.csv:10; .html:1; .json:3; .png:9; .qmd:1,其他输出或中间过程
+mvp_cn/outputs/high_freq_adaptive,8,2,5,2026-06-23 11:42:51,.csv:2; .json:1; .png:5,月频、双周、周频适配实验
+mvp_cn/outputs/eight_etf_extended,25,15,4,2026-06-23 15:23:16,.csv:15; .json:2; .png:4; .svg:4,6ETF/8ETF与5/8因子组合对比
+mvp_cn/outputs/final_converged_compare,23,12,5,2026-06-23 15:33:38,.csv:12; .json:1; .png:5; .svg:5,最终收束版与昨日版本、基准比较
+mvp_cn/outputs/ma180_final,11,5,5,2026-06-23 15:39:38,.csv:5; .json:1; .png:5,180MA/200MA选择与最终日频回测
+mvp_cn/outputs/ridge_overfit_diagnostics,5,4,0,2026-06-23 15:48:21,.csv:4; .json:1,其他输出或中间过程
+mvp_cn/outputs/final_report,31,9,20,2026-06-23 16:00:17,.csv:9; .html:1; .png:20; .qmd:1,中期完整报告图组：8ETF/12ETF/POOS/因子管道
+mvp_cn/outputs/factor_candidates,19,12,4,2026-06-23 20:19:31,.csv:12; .json:2; .md:1; .png:4,候选因子IC、冗余度和数据源可得性
+mvp_cn/outputs/factor_model_search,18,11,6,2026-06-23 20:47:58,.csv:11; .json:1; .png:6,后续因子组合、组件拆解和模型搜索
+mvp_cn/outputs/comprehensive_robustness,13,12,0,2026-06-23 20:58:11,.csv:12; .md:1,90组/108组稳健性矩阵与规格搜索审计
+mvp_cn/outputs/adaptive_wall_factor_report,16,8,8,2026-06-23 21:00:24,.csv:8; .png:8,其他输出或中间过程
+mvp_cn/outputs/risk_overlay_tests,17,3,14,2026-06-23 21:06:25,.csv:3; .png:14,风险覆盖与风险控制叠加测试
+mvp_cn/outputs/aggressive_reversal_tests,9,5,4,2026-06-23 21:11:45,.csv:5; .png:4,抄底/反转因子失败尝试
+mvp_cn/outputs/aggressive_reversal_frequency_tests,20,4,16,2026-06-23 21:26:50,.csv:4; .png:16,反转因子与频率联合失败尝试
+mvp_cn/outputs/fundamental_expectation_factor_tests,33,31,2,2026-06-23 21:42:43,.csv:31; .png:2,业绩预期与研报覆盖因子探索
+mvp_cn/outputs/algorithm_comparison_tests,12,10,2,2026-06-23 22:14:20,.csv:10; .png:2,其他输出或中间过程
+mvp_cn/outputs/research_documentation,9,1,0,2026-06-23 22:41:00,.csv:1; .md:8,DeepSeek打包探索包：时间线、文件清单、方法与最终结果

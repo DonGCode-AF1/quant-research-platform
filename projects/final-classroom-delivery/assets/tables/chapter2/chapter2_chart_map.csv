@@ -1,0 +1,11 @@
+﻿图号,文件,用途
+图2-1,assets/figures/chapter2/fig2_1_etf_industry_coverage.png,展示基础资产池行业覆盖
+图2-2,assets/figures/chapter2/fig2_2_data_coverage_timeline.png,展示样本覆盖和共同样本约束
+图2-3,assets/figures/chapter2/fig2_3_factor_construction_schematic.png,解释初始因子构造
+图2-4,assets/figures/chapter2/fig2_4_initial_factor_correlation.png,展示初始因子共线性
+图2-5,正文 Mermaid 图,解释基准策略流程
+图2-6,正文 Mermaid 图,解释训练窗口和T+1执行
+图2-7,assets/figures/chapter2/fig2_7_baseline_equity_curves.png,展示第一版累计净值
+图2-8,assets/figures/chapter2/fig2_8_baseline_drawdowns.png,展示第一版回撤
+图2-9,assets/figures/chapter2/fig2_9_baseline_excess_returns.png,展示相对基准累计超额
+图2-10,assets/figures/chapter2/fig2_10_component_ablation_metrics.png,展示收益来源拆解
