@@ -13,6 +13,7 @@
 - `source/slides.qmd`：RevealJS 幻灯片源文件。
 - `source/speaker_notes.md`：逐页讲稿。
 - `source/references.bib`：参考文献。
+- `source/supplement_rotation_and_model_questions.md`：关于月度持仓、LASSO/Ridge、ETF 池选择和轮动关系的补充说明。
 
 ## 发布说明
 
