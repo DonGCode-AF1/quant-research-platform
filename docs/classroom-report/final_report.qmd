@@ -585,6 +585,188 @@ $$
 
 因此，基准策略的作用不是给出最终答案，而是建立一个能够被拆解和检验的研究对象。下一部分将进一步考察：基准收益究竟来自行业排序、趋势过滤还是交易规则，以及机器学习是否相对于简单因子组合提供了额外改善。
 
+### 3.5 实现概要：从数据到回测的完整流程
+
+为便于复现，以下以伪代码形式呈现策略的完整实现链路。实际代码基于 Python，数据源为 Yahoo Finance，模型采用 scikit-learn 的 `Ridge` 配合滚动窗口训练。
+
+#### 步骤 1：数据获取与价格整理
+
+```python
+import pandas as pd
+import yfinance as yf
+
+# 6只宽口径行业ETF的Yahoo贴标
+TICKERS = {
+    "消费": "510150.SS",   # 消费ETF
+    "医药": "512010.SS",   # 医药ETF
+    "金融": "510230.SS",   # 金融ETF
+    "科技": "515000.SS",   # 科技ETF
+    "能源": "510410.SS",   # 能源ETF
+    "军工": "512660.SS",   # 军工ETF
+}
+
+prices = pd.DataFrame()
+for name, ticker in TICKERS.items():
+    df = yf.download(ticker, start="2015-01-01", progress=False)
+    prices[name] = df["Adj Close"]          # 使用复权收盘价
+
+returns = prices.pct_change()               # 日收益率
+```
+
+#### 步骤 2：因子构建与截面标准化
+
+```python
+import numpy as np
+
+def build_factors(prices):
+    """为每只ETF计算5个基准因子"""
+    f = pd.DataFrame(index=prices.index)
+    for name in prices.columns:
+        p = prices[name]
+        r = p.pct_change()
+        vol = r.rolling(63).std() * np.sqrt(252)
+
+        f[f"{name}_mom_63"]  = p / p.shift(63)  - 1    # 季度动量
+        f[f"{name}_mom_126"] = p / p.shift(126) - 1    # 半年动量
+        f[f"{name}_mom_252"] = p / p.shift(252) - 1    # 年度动量
+        f[f"{name}_trend"]   = rolling_trend_quality(p, 126)  # 趋势质量
+        f[f"{name}_lowvol"]  = -vol                       # 低波动(取负号)
+    return f
+
+def cross_sectional_zscore(df, col):
+    """截面z-score标准化：每期在所有ETF间去均值除标准差"""
+    g = df.groupby(level="date")[col]
+    return (df[col] - g.transform("mean")) / g.transform("std")
+```
+
+> **为什么要做截面标准化？** 不同因子的量纲差异很大（动量是百分比，波动率是小数，趋势质量无单位）。z-score 使每个因子在截面上均值为0、标准差为1，确保 Ridge 的 L2 惩罚对所有因子施加一致的约束力。未经标准化的因子会被模型"误解"为信息量更大（仅仅因为数值范围更宽），导致系数估计偏斜。
+
+#### 步骤 3：走步式滚动训练（Ridge）
+
+```python
+from sklearn.linear_model import Ridge
+
+def walk_forward_train(panel, train_months=24, embargo_days=21):
+    """
+    核心训练循环：
+    - train_months: 滚动窗口长度（24个月）
+    - embargo_days: 数据禁运区（21天），杜绝前瞻信息泄露
+    """
+    dates = panel.index.get_level_values("date").unique().sort_values()
+    scores = []  # 存储每期各ETF的排序分数
+
+    for i, t in enumerate(dates):
+        # 训练窗口：[t - 24个月, t)
+        train_start = t - pd.DateOffset(months=train_months)
+        train = panel.loc[train_start:t].copy()
+
+        # *** 关键 ***：禁运区——训练样本的标签日期必须 < t
+        # 保证在t时刻，模型没有"看到"任何t之后的收益信息
+        train = train[train["label_end_date"] < t]
+
+        # 当前期需要预测的ETF
+        current = panel.loc[panel.index.get_level_values("date") == t]
+
+        if len(train) < 36 or current.empty:
+            continue  # 训练样本不足，跳过
+
+        # Ridge回归：alpha通过交叉验证选择
+        X_train = train[FEATURE_COLS].values
+        y_train = train["future_return"].values
+        model = Ridge(alpha=1.0).fit(X_train, y_train)
+
+        # 对当前期ETF打分
+        X_pred = current[FEATURE_COLS].values
+        pred = model.predict(X_pred)         # 这就是排序分数
+        scores.append(pd.DataFrame({
+            "date": t, "ticker": current.index.get_level_values("ticker"),
+            "score": pred
+        }))
+    return pd.concat(scores)
+```
+
+#### 步骤 4：排序映射与趋势过滤
+
+```python
+def target_weights(scores, prices, top_k=3, ma_window=180):
+    """将排序分数转化为目标权重，叠加MA趋势过滤"""
+    weights = pd.DataFrame(index=scores["date"].unique(),
+                           columns=prices.columns)
+
+    for date, group in scores.groupby("date"):
+        # (a) 取分数最高的top_k只ETF
+        top = group.nlargest(top_k, "score")
+
+        # (b) 趋势过滤：剔除价格低于180MA的ETF
+        keep = []
+        for _, row in top.iterrows():
+            etf = row["ticker"]
+            price_now = prices.loc[date, etf]
+            ma180 = prices[etf].rolling(ma_window).mean().loc[date]
+            if price_now > ma180:
+                keep.append(etf)
+
+        # (c) 通过过滤的ETF等权配置
+        if keep:
+            weights.loc[date, keep] = 1.0 / len(keep)
+        # 如果全部未通过，当期空仓（权重全0）
+
+    return weights.fillna(0.0)
+```
+
+#### 步骤 5：回测执行与绩效计算
+
+```python
+def backtest(weights, returns, cost_bps=15):
+    """执行回测，扣除双边交易成本"""
+    # 信号在t日收盘后产生，t+1日收盘价成交，t+2日产生第一笔持仓收益
+    traded = weights.shift(1).fillna(0.0)     # t+1成交
+    effective = traded.shift(1).fillna(0.0)   # t+2生效
+
+    # 换手率 = 各ETF权重变化的绝对值之和
+    turnover = traded.diff().abs().sum(axis=1)
+
+    # 日收益 = 持仓权重 × 资产日收益 - 交易成本
+    gross = (effective * returns).sum(axis=1)
+    cost = turnover * cost_bps / 10000.0
+    net = gross - cost
+
+    # 绩效指标
+    equity = (1 + net).cumprod()
+    years = len(net) / 252
+    cagr = equity.iloc[-1] ** (1/years) - 1
+    sharpe = net.mean() / net.std() * np.sqrt(252)
+    max_dd = (equity / equity.cummax() - 1).min()
+
+    return {"cagr": cagr, "sharpe": sharpe, "max_dd": max_dd}
+```
+
+> **成本扣除的时序逻辑**：信号在 $T$ 日收盘后产生 → $T+1$ 日以收盘价执行调仓 → 新仓位在 $T+2$ 日开始产生收益（因为 $T+2$ 的日收益是 $T+1$ 收盘到 $T+2$ 收盘的价差）。这保证了回测中不存在"当日信号、当日成交"的未来信息偏差。双边15bp成本在每次调仓时从 $T+1$ 日的收益中扣除。
+
+#### 步骤 6：多墙 POOS 检验
+
+```python
+WALLS = ["2018-12-31", "2019-12-31", "2020-12-31",
+         "2021-12-31", "2022-12-31"]
+
+def poos_validation(panel, wall_date):
+    """伪样本外检验：墙前开发，墙后冻结评估"""
+    # 在墙前完成所有开发工作（因子筛选、超参锁定）
+    dev_panel = panel.loc[panel.index.get_level_values("date") < wall_date]
+    best_config = select_best_config(dev_panel)   # 墙前最优参数
+
+    # 墙后仅做纯样本外预测，不再调整任何参数
+    test_panel = panel.loc[panel.index.get_level_values("date") >= wall_date]
+    scores = walk_forward_train(test_panel, **best_config)
+    weights = target_weights(scores, prices)
+    metrics = backtest(weights, returns)
+    return metrics
+```
+
+以上六步构成了本文策略的完整计算链路：数据 → 因子 → 标准化 → 滚动训练 → 排序+过滤 → 回测 → 绩效输出。每一步均有明确的时点对齐和前瞻信息防控机制，第四部分将在此基础上深入讨论正则化方法的选择与训练框架的设计。
+
+---
+
 ## 第四部分 机器学习排序模型（核心方法章）
 
 第三部分建立了一套可运行的基准策略，但它留下了一个关键问题：当动量、趋势和风险指标高度相关时，如何稳定地综合这些信息？
