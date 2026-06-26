@@ -1,7 +1,9 @@
 ---
 title: "机器学习辅助的中国行业ETF轮动"
 subtitle: "弱信号治理与规格审计框架"
-author: "量化金融研究组"
+author:
+  - "沈小川"
+  - "董袁豪"
 date: "2026-06-26"
 lang: zh
 format:
