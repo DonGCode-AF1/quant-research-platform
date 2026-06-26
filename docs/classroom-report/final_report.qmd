@@ -10,11 +10,12 @@ lang: zh
 format:
   html:
     theme:
-      light: flatly
-      dark: darkly
+      light: [cosmo, assets/report-style.css]
+      dark: [darkly, assets/report-style.css]
     toc: true
     toc-depth: 3
     toc-location: left
+    toc-title: "目 录"
     number-sections: true
     number-depth: 2
     code-fold: false
@@ -23,19 +24,8 @@ format:
     fig-cap-location: bottom
     fig-width: 9
     fig-height: 5
-    css: assets/report-style.css
-    include-in-header:
-      text: |
-        <style>
-          body { font-family: "Segoe UI", "Noto Sans SC", sans-serif; }
-          h1, h2, h3 { color: #2c3e50; }
-          .callout-note { border-left-color: #3498db; }
-          .callout-important { border-left-color: #e74c3c; }
-          .callout-tip { border-left-color: #27ae60; }
-          table { font-size: 0.9em; }
-          figcaption { text-align: center; color: #7f8c8d; font-size: 0.9em; }
-          .katex { font-size: 1.05em; }
-        </style>
+    mainfont: "Noto Sans SC"
+    fontsize: "16px"
 bibliography: assets/references.bib
 abstract: |
   本研究以中国A股市场6只宽口径行业ETF为对象，系统考察正则化机器学习方法（Ridge、LASSO、Elastic Net）在行业轮动策略中的实际作用。在低维横截面、高噪声、强共线性的约束下，机器学习的主要贡献不在于发现新的Alpha因子，而在于对多维弱信号进行稳健收缩与排序整合。研究构建了包含资产池、因子集、模型选择、训练窗口和交易规则五个层级的规格空间，通过双阶段探索与多维审计（PBO/CSCV、多墙POOS、滚动起点敏感性）完成参数收敛。最终锁定策略年化收益14.6%，Sharpe 0.75，相对沪深300ETF累计超额102%。实证表明，策略的本质更接近"带趋势过滤的行业Beta择时系统"，正则化方法在其中承担弱信号治理工具的角色。
@@ -627,11 +617,7 @@ Elastic Net则把两者结合在一起，既收缩又筛选。在ETF数量少、
 
 ![图4-2 滚动窗口与拓展窗口训练框架对比](assets/figures/deep_training_window_diagram.png)
 
-两种框架各有利弊。滚动窗口对近期市场状态更敏感，但样本量固定导致估计方差较大；拓展窗口样本量递增、估计更稳定，但可能被陈旧的市场结构所拖累。图4-3进一步展示了滚动窗口在实际策略运行中的逐期执行流程。
-
-![图4-3 滚动训练在策略中的逐期执行示意](assets/figures/chapter2/fig2_6_rolling_training_execution.png)
-
-图4-3从策略运行的角度展示了滚动训练的逐期执行逻辑。在每一个调仓日T，模型使用T之前固定长度的历史窗口训练参数，然后对T+1期进行预测；下一期窗口向右滑动一格，加入最新数据、剔除最旧数据，重新训练、重新预测。这种"训练→预测→滑动→再训练"的循环贯穿整个回测期。无论采用哪种窗口方案，都遵循同一条原则：**在任何预测时点，模型只能且必须仅使用该时点之前已经实现、且不包含未来任何重叠标签的非前瞻信息**。本研究的全部回测与参数估计均严格遵守了这一逐期重估、数据禁运和时点对齐的三项准则。
+两种框架各有利弊。滚动窗口对近期市场状态更敏感，但样本量固定导致估计方差较大；拓展窗口样本量递增、估计更稳定，但可能被陈旧的市场结构所拖累。无论采用哪种窗口方案，都遵循同一条原则：**在任何预测时点，模型只能且必须仅使用该时点之前已经实现、且不包含未来任何重叠标签的非前瞻信息**。本研究的全部回测与参数估计均严格遵守了这一逐期重估、数据禁运和时点对齐的三项准则。
 
 #### 4.3.4 训练窗口长度的实证对比与学理取舍
 
